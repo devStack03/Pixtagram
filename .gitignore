@@ -40,5 +40,6 @@ Thumbs.db
 
 # user customization
 src/@fuse
-src/shared/config.ts
-src/shared/global.ts
+src/app/shared/config.ts
+src/app/shared/global.ts
+src/app/shared/constants.ts
