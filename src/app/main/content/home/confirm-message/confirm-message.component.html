@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Confirm</h1>
+<div mat-dialog-content>{{this.data.confirmMessage}}</div>
+<div *ngIf="this.data.confirm1">{{this.data.confirm1}}</div>
+<div *ngIf="this.data.follow">
+    <form name="mediaForm" [formGroup]="mediaForm">
+        <mat-form-field  appearance="outline" class="pb-small">
+            <mat-label>Price in Nudles to view: (0=free)</mat-label>
+            <input matInput placeholder="0" formControlName="fee" required type="number" maxlength="10" min="0" [(ngModel)]="feeVal">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-button style="color: #fff;background-color: #153961;" (click)="confrim()">Confirm</button>
+    <button mat-button (click)="dialogRef.close(false)">Cancel</button>
+</div>

@@ -1,0 +1,31 @@
+<div class="page-layout carded fullWidth" fxLayout="column"
+     infiniteScroll
+     [infiniteScrollDistance]="1"
+     [infiniteScrollThrottle]="50"
+     [infiniteScrollContainer]="'#container-3'"
+     [fromRoot]="true"
+     (scrolled)="onScroll()">
+
+    <div id="following">
+        <div fxLayout="row" class="search-panel">
+            <h3 class="label text-bold">To : </h3>
+            <input matInput placeholder="Search..." #searchField (keyup)="onSearch($event)">
+        </div>
+
+        <div fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign="start center" *ngFor="let user of users" class="mb-3">
+                <div class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+                    <img src="{{user?.avatar ? user.avatar : 'assets/images/avatars/katherine.jpg'}}" class="avatar" />
+                </div>
+
+                <div fxLayout="row" fxFlex fxLayoutAlign="start center">
+                    <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                        <div class="username"><a (click)="gotoUsePage(user.id)">{{user.username}}</a></div>
+                    </div>
+                    <button *ngIf="user.fType   && this.data == 1" mat-stroked-button (click)="setFollow(user.id,0)">Unfollow</button>
+                    <button *ngIf="!user.fType  && this.data == 1" mat-stroked-button (click)="setFollow(user.id,0,user.fee)">Follow</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

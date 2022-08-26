@@ -1,0 +1,11 @@
+<!-- SIDENAV CONTENT -->
+<div class="content">
+  <div class="nav">
+    <div class="nav-item" *ngFor="let item of lists">
+      <a class="nav-link" matRipple [routerLink]="'/accounts/' + item.handle" routerLinkActive="active">
+        <span>{{item.title}}</span>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- / SIDENAV CONTENT -->

@@ -1,0 +1,20 @@
+<div class="page-layout carded fullWidth" fxLayout="row" fxLayoutAlign="center">
+    <div class="new-post">
+        <div class="content w-100-p" fxLayout="row" fxLayoutAlign="space-between">
+            <block-ui class="w-100-p" fxLayout="row " fxLayoutAlign="center">
+                <form class="w-100-p" [formGroup]="postForm" novalidate fxLayout="column" fxLayoutAlign="start">
+                    <div class="separate-bar" fxLayout="row" fxLayoutAlign="center center"></div>
+                    <div fxLayout="row">
+                        <mat-form-field appearance="outline">
+                            <textarea matInput  formControlName="title"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="pt-20" fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button class="submit-button pl-30 pr-30" color="primary" [disabled]="postForm.invalid"
+                                (click)="onSubmit()">Copy Code</button>
+                    </div>
+                </form>
+            </block-ui>
+        </div>
+    </div>
+</div>

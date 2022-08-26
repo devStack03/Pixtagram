@@ -1,0 +1,265 @@
+
+<mat-toolbar class="p-0 mat-elevation-z1" >
+
+    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">
+
+        <!-- <div style="flex:1" fxLayout="row" fxLayoutAlign="start center">
+
+            <button mat-icon-button class="navbar-toggle-button" *ngIf="!hiddenNavbar && !rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" *ngIf="hiddenNavbar && rightNavbar" fxHide.gt-md></div>
+
+        </div> -->
+        <div fxLayout="row" fxLayoutAlign="start center" *ngIf="!horizontalNavbar" style="flex:1">
+            <div class="logo ml-16">
+                <a [routerLink]="['/']"><img class="logo-icon" src="assets/images/logos/logo.png" fxHide fxShow.gt-xs></a>
+            </div>
+        </div>
+
+        <!-- <div class="fuse-search-bar-content">
+
+            <label for="fuse-search-bar-input">
+                <button mat-icon-button class="fuse-search-bar-expander" aria-label="Expand Search Bar" >
+                    <mat-icon class="s-24">search</mat-icon>
+                </button>
+            -->
+        <!--<span class="fuse-search-bar-loader" fxLayout="row" fxLayoutAlign="center center" *ngIf="!collapsed">
+                    <mat-progress-spinner color="mat-accent" mode="indeterminate"></mat-progress-spinner>
+                </span>-->
+        <!-- </label>
+
+            <input id="fuse-search-bar-input" [formControl]="searchInput" class="ml-24" type="text" placeholder="Search" fxFlex>
+
+            <button mat-icon-button class="fuse-search-bar-collapser" aria-label="Collapse Search Bar" (click)="collapse()">
+                <mat-icon class="s-24">close</mat-icon>
+            </button>
+
+        </div> -->
+        <!-- <div class="blank-space"></div> -->
+        <div style="flex:1" fxLayout="row" fxLayoutAlign="end center">
+            <!-- <button mat-button class="user-button" [routerLink]="'post'">
+                <mat-icon>create</mat-icon>
+            </button>
+            <button mat-button class="user-button">
+                <mat-icon>favorite_border</mat-icon>
+            </button>
+            <button mat-button class="user-button" [routerLink]="'explore'">
+                <mat-icon>filter_tilt_shift</mat-icon>
+            </button> -->
+
+
+<!--            <div class="toolbar-separator"></div>-->
+
+<!--            <fuse-search-bar (input)="search($event)"></fuse-search-bar> -->
+            <span mat-button class="user-button">
+                <button *ngIf="!this.balanceRefresh" mat-button class="init_btn" (click)="refreshBalance()"><mat-icon>refresh</mat-icon></button>
+                <img *ngIf="this.balanceRefresh" src="/assets/images/server-refresh.gif" width="20" class="nn_off">
+                {{this.userService.balance.getValue()}}<img src="/assets/images/nudles_off.png" class="nn_off">
+            </span>
+            <button mat-button class="user-button" [routerLink]="'/search'">
+                <mat-icon>search</mat-icon>
+            </button>
+<!--            <div class="toolbar-separator"></div>-->
+            <button mat-button class="user-button" [routerLink]="'/post'">
+                <mat-icon>add_a_photo</mat-icon>
+            </button>
+<!--            <div class="toolbar-separator"></div>-->
+            <button mat-button class="user-button"
+                    (menuOpened)="onMenuOpen($event)"
+                    [matMenuTriggerFor]="notificationMenu">
+                <mat-icon>notifications_none</mat-icon>
+                <div *ngIf="readed > 0"  class="new-message"></div>
+            </button>
+
+            <mat-menu
+                [class]="'notification-menu' + (notifications.length>0 ? '' : '-empty')" #notificationMenu="matMenu" [overlapTrigger]="false">
+                <div *ngIf="notifications.length == 0">
+                    <h3 style="padding: 20px;">
+                        No notifications.
+                    </h3>
+                </div>
+
+
+                <div
+                    class="notification-content"
+                >
+                    <div  mat-menu-item *ngIf="notifications.length > 0" (click)="clearNotifications()">
+                        <span>
+                            Clear Notifications.
+                        </span>
+                    </div>
+
+                    <div *ngFor="let notification of notifications" class="notification-item">
+                        <a [routerLink]="'/view-post/' + notification.postId">
+                        <div fxLayout="row" fxLayoutAlign="start center" >
+                            <div class="avatar-wrapper" fxLayout="column" fxFlex="0 1 auto" fxLayoutAlign="start start" (click)="gotoProfile(notification._id)">
+                                <img src="{{notification.avatar}}" class="avatar" />
+<!--                                <mat-icon class="s-16 type-button">{{getNoticationIcon(notification)}}</mat-icon>-->
+                            </div>
+
+                            <div fxLayout="row" fxFlex>
+
+                                <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                                    <div class="username"><b>{{notification.username}}</b></div>
+                                    <div class="where">{{notification.msg}}</div>
+                                </div>
+
+                                <div class="pl-4" fxLayout="column" fxLayoutAlign="start end">
+                                    <div class="time">
+                                        {{formatFromNow(notification.createdAt)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </a>
+                    </div>
+
+                    <div  mat-menu-item   style="text-align: center;" (click)="gotoNotifiList()">
+                        View All
+                    </div>
+                </div>
+            </mat-menu>
+<!--            <div class="toolbar-separator"></div>-->
+            <button mat-button class="user-button" [routerLink]="'/messages'">
+                <mat-icon>sms</mat-icon>
+                <div *ngIf="this.chatNumber > 0"  class="new-message"></div>
+            </button>
+
+            <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="avatar mr-0 mr-sm-16"
+                         [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/Velazquez.jpg'">
+                    <span class="username mr-12" fxHide fxShow.gt-sm>{{user?.username}}</span>
+                    <mat-icon class="s-16" fxHide.xs>keyboard_arrow_down</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item (click)="showProfile()">
+                    <mat-icon>account_circle</mat-icon>
+                    <span>My Profile</span>
+                </button>
+<!--                <button mat-menu-item (click)="showFollowSet()">-->
+<!--                    <mat-icon>settings</mat-icon>-->
+<!--                    <span>Settings</span>-->
+<!--                </button>-->
+                <button mat-menu-item class="" (click)="showMessages()">
+                    <mat-icon>mail</mat-icon>
+                    <span>Inbox</span>
+                </button>
+                <button mat-menu-item (click)="showTransaction()">
+                    <mat-icon>money</mat-icon>
+                    <span>Transaction</span>
+                </button>
+                <button mat-menu-item class="" (click)="logout()">
+                    <mat-icon>exit_to_app</mat-icon>
+                    <span>Logout</span>
+                </button>
+                <button mat-menu-item class="" (click)="report()">
+                    <mat-icon>report</mat-icon>
+                    <span>Bug Report</span>
+                </button>
+            </mat-menu>
+            <!-- <div class="toolbar-separator"></div>
+
+            <button mat-button fxHide fxShow.gt-xs
+                    class="language-button"
+                    [matMenuTriggerFor]="languageMenu">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <img class="flag mr-8" [src]="'assets/icons/flags/'+selectedLanguage.flag+'.png'">
+                    <span class="iso text-uppercase">{{selectedLanguage.id}}</span>
+                </div>
+            </button>
+
+            <mat-menu #languageMenu="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item *ngFor="let lang of languages" (click)="setLanguage(lang)">
+                    <span fxLayout="row" fxLayoutAlign="start center">
+                        <img class="flag mr-16" [src]="'assets/icons/flags/'+lang.flag+'.png'">
+                        <span class="iso">{{lang.title}}</span>
+                    </span>
+                </button>
+
+            </mat-menu> -->
+
+            <!-- <div class="toolbar-separator" fxHide fxShow.gt-xs></div>
+
+            <button mat-icon-button
+                    class="quick-panel-toggle-button"
+                    (click)="toggleSidebarOpen('quickPanel')"
+                    aria-label="Toggle quick panel">
+                <mat-icon class="secondary-text">format_list_bulleted</mat-icon>
+            </button>
+
+            <div class="toolbar-separator" *ngIf="!hiddenNavbar && rightNavbar" fxHide fxShow.gt-xs></div>
+
+            <button mat-icon-button class="navbar-toggle-button"
+                    *ngIf="!hiddenNavbar && rightNavbar" (click)="toggleSidebarOpen('navbar')" fxHide.gt-md>
+                <mat-icon class="secondary-text">menu</mat-icon>
+            </button> -->
+
+        </div>
+
+    </div>
+
+</mat-toolbar>
+
+<!--<mat-toolbar class="p-0 mat-elevation-z1" *ngIf="toolbarType && toolbarType!='/'">-->
+
+<!--    <div fxFlex fxFill fxLayout="row" fxLayoutAlign="start center">-->
+
+<!--        <div fxLayout="row" fxLayoutAlign="start center">-->
+
+<!--            <button mat-button class="user-button" (click)="onBack()">-->
+<!--                <mat-icon>arrow_back_ios</mat-icon>-->
+<!--                <span class="secondary-text ml-16" *ngIf="!showUsers">{{toolbarName}}</span>-->
+<!--            </button>-->
+
+<!--        </div>-->
+
+<!--        <div style="flex:1" fxLayout="row" fxLayoutAlign="start center" *ngIf="showUsers">-->
+<!--            <div fxLayout="row" *ngFor="let receiver of userList" fxLayoutAlign="start center">-->
+<!--                <img class="avatar mr-4"-->
+<!--                    [src]=" receiver?.avatar ? receiver?.avatar :'assets/images/avatars/Velazquez.jpg'">-->
+<!--                <span class="username s-18 mr-16">{{receiver?.username}}</span>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="blank-space"></div>-->
+<!--        <div style="flex:1" fxLayout="row" fxLayoutAlign="end center" *ngIf="showSetting">-->
+<!--            <button mat-button class="user-button" (click)="onSettingClicked()">-->
+<!--                <mat-icon>settings</mat-icon>-->
+<!--            </button>-->
+<!--        </div>-->
+
+<!--        <div style="flex:1" fxLayout="row" fxLayoutAlign="end center" *ngIf="showComposeChat">-->
+<!--            <button mat-button class="user-button" (click)="onComposeChatClicked()">-->
+<!--                <mat-icon>edit</mat-icon>-->
+<!--            </button>-->
+<!--        </div>-->
+
+<!--    </div>-->
+
+<!--</mat-toolbar>-->
+
+<!--<ng-template #SettingMenuDialog>-->
+<!--    &lt;!&ndash; <h2 style="margin-top: 0px;"><mat-icon class="secondary-text s-20 mr-8">share</mat-icon> Sharing...</h2> &ndash;&gt;-->
+<!--    <div class="dialog-menu-wrapper">-->
+<!--        <mat-dialog-content class="cropper-content">-->
+<!--            <div class="fuse-card dialog-menu-items">-->
+<!--                <button mat-menu-item (click)="dialogRef.close(['Edit Profile'])">Edit Profile</button>-->
+<!--                <div class="card-divider full-width"></div>-->
+<!--                <button mat-menu-item (click)="dialogRef.close(['Change Password'])">Change Password</button>-->
+<!--                <div class="card-divider full-width"></div>-->
+<!--                <button mat-menu-item (click)="dialogRef.close(['Privacy and Security'])">Privacy and Security</button>-->
+<!--                <div class="card-divider full-width"></div>-->
+<!--                <button mat-menu-item (click)="dialogRef.close(['logout'])">Logout</button>-->
+<!--                <div class="card-divider full-width"></div>-->
+<!--                <button mat-menu-item (click)="dialogRef.close()">Cancel</button>-->
+<!--            </div>-->
+<!--        </mat-dialog-content>-->
+<!--    </div>-->
+<!--</ng-template>-->

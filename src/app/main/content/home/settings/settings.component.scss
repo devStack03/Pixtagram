@@ -1,0 +1,15 @@
+.settings{
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    max-width: 600px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex: 1 0 auto;
+    .mat-form-field-infix{
+        width: 90px;
+    }
+}
+
+

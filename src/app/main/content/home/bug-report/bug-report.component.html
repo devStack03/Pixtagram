@@ -1,0 +1,85 @@
+<div class="page-layout carded fullWidth" fxLayout="row" fxLayoutAlign="center">
+    <div class="new-post">
+        <div class="content p-16 w-100-p" fxLayout="row" fxLayoutAlign="space-between">
+            <block-ui class="w-100-p" fxLayout="row " fxLayoutAlign="center">
+                <form class="w-100-p" [formGroup]="postForm" novalidate fxLayout="column" fxLayoutAlign="start">
+                    <input id="post_photo_input" name="post_photo_input" hidden type="file" #photoInput
+                           accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg"
+                           (change)="onFileInput($event.target.files[0])">
+
+                    <div class="p-4" fxLayout="row" fxLayoutAlign="start">
+                        <h3 class="label">Bug Report</h3>
+                    </div>
+                    <div fxLayout="row">
+                        <img class="avatar post-avatar" [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'"
+                             [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        <mat-form-field appearance="outline">
+                            <textarea matInput placeholder="Write a Reason..." formControlName="title"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <div class="separate-bar" fxLayout="row" fxLayoutAlign="center center"></div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <div class="media" fxLayout="row" (click)="onOpenFile('post_photo_input')">
+                            <div *ngIf="postType===1" fxLayout="column">
+                                <div fxLayout="row" fxLayoutAlign="center center">
+                                    <mat-icon class="s-60">add_photo_alternate</mat-icon>
+                                </div>
+                                <div fxLayout="row" fxLayoutAlign="center center">
+                                    <span class="s-30">Attach_File</span>
+                                </div>
+                            </div>
+                            <img #imgPhoto [src]="'assets/images/avatars/profile.jpg'"
+                                 [style]="postType===2 ?'display: block' : 'display: none'">
+                            <div [style]="postType===3 ?'display: block' : 'display: none'">
+                                <video #imgVideo id="singleVideo" preload="auto" controls style="max-width: 100%;">
+                                    <source [src]="" type="video/3gpp">
+                                </video>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-20" fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" [disabled]="postForm.invalid"
+                                (click)="onSubmit()">Report</button>
+                    </div>
+                    <div id="search"
+                         infiniteScroll
+                         [infiniteScrollDistance]="1"
+                         [infiniteScrollThrottle]="50"
+                         [fromRoot]="true"
+                         (scrolled)="onScroll()" class="mt-8">
+                        <div class="header">
+                            <div fxLayout="row" fxLayoutAlign="center center">
+                                <img *ngIf="loadings" src="assets/images/loading/loading-spinner-blue.gif" class="loading mt-16" />
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="users" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+                                <button mat-button class="user" *ngFor="let bug of bugs" [@animate]="{value:'*',params:{y:'100%'}}" (click)="openDialog(bug)">
+                                    <div fxLayout="row" fxLayoutAlign="start center">
+                                        <div fxLayout="row" fxFlex>
+                                            <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                                                <div class="username" *ngIf="bug.title.length < 60">{{bug.title}}</div>
+                                                <div class="username" *ngIf="bug.title.length >= 60">{{bug.title | slice:0:60}}...</div>
+                                            </div>
+                                            <div class="pt-4 secondary-text">{{bug?.pending}}</div>
+                                        </div>
+                                    </div>
+                                </button>
+
+                                <div cclass="no-courses" *ngIf="!loadings && bugs.length === 0">
+                                    No Bug Report Found!
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </block-ui>
+        </div>
+    </div>
+
+    <div class="center">
+    </div>
+
+</div>
+
+

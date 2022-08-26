@@ -1,0 +1,158 @@
+@import 'src/@fuse/scss/fuse';
+
+
+app-message-room {
+    .mat-sidenav-container {
+        display: flex;
+        flex: 1;
+        width: 100%;
+
+        > .mat-sidenav-content,
+        > .mat-drawer-content {
+            display: flex;
+            flex: 1 1 auto;
+            min-height: 100%;
+            height: auto;
+        }
+
+        > .mat-drawer-content {
+            max-width: 100%;
+        }
+
+        mat-sidenav {
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            max-width: 90%;
+            overflow: hidden;
+        }
+        #message-room {
+            max-width: 600px;
+            width: 100%;
+            //background-color: #fff;
+            border: 1px solid #dbdbdb;
+            //margin: auto;
+
+            .content {
+
+                .loading-courses {
+                    font-size: 24px;
+                    text-align: center;
+
+                    .loading {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+
+                .rooms {
+                    width: 100%;
+                    max-width: 740px;
+                    //margin: px auto;
+                    padding: 8px 20px;
+                    .unread-message-count {
+                        font-size: 12px;
+                        border-radius: 50%;
+                        text-align: center;
+                        width: 20px;
+                        height: 20px;
+                        line-height: 20px;
+                    }
+                    .messages-text {
+                        font-size: 18px;
+                        font-weight: 400;
+                        letter-spacing: .010em;
+                        padding: 10px 16px;
+                    }
+
+                    @include media-breakpoint('xs') {
+                        padding: 8px 4px;
+                    }
+
+
+                    @include media-breakpoint('lt-md') {
+                        margin: 0 0;
+                        //padding: 0 0;
+                    }
+
+                    .no-courses {
+                        font-size: 24px;
+                        margin: 24px 0;
+                        text-align: center;
+                    }
+
+                    .room {
+                        white-space: normal;
+                        text-align: left;
+                        letter-spacing: .010em;
+                        min-height: 70px;
+                        border: 1px solid;
+                        padding: 4px 16px;
+                        font-weight: 400;
+                        border-radius: 4;
+                        border-color: #cccccc;
+                        margin-bottom: 4px;
+
+                        @include media-breakpoint('xs') {
+                            margin-bottom: 4px;
+                            padding: 0 4px;
+                        }
+
+                        .username {
+                            font-size: 18px;
+                            white-space: nowrap;
+                            text-overflow: ellipsis;
+                        }
+
+                        .msg {
+                            line-height: normal;
+                            margin-top: 0;
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            word-break: break-word;
+                        }
+
+                        .time {
+                            font-size: 12px;
+                            margin-top: 4px;
+                        }
+
+                        .avatar-wrapper {
+
+                            .avatar {
+                                margin-right: 16px;
+                            }
+
+                            .new-message {
+                                position: absolute;
+                                border: 5px solid #35d050;
+                                border-radius: 50%;
+                                right: 12px;
+                                top: -3px;
+                            }
+                        }
+
+                    }
+
+                }
+
+                .message-circle-icon {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 50%;
+                    border-color: #808080;
+                    border-width: 1px;
+                    border-style: solid;
+                    text-align: center;
+                    color: #808080;
+                    mat-icon {
+                        font-size: 40px;
+                        min-width: 40px;
+                        min-height: 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+

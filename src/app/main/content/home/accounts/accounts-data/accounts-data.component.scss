@@ -1,0 +1,74 @@
+form {
+    width: 300px;
+    .mat-form-field {
+        width: 100%;
+    }
+}
+.edit-profile {
+    width: 100%;
+}
+.edit-avatar {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 100% !important;
+    margin: 0 !important;
+}
+
+.profile-photo {
+}
+.optionButton {
+    cursor: pointer;
+}
+#user-avatar-input {
+    display: none;
+}
+
+.XX1Wc {
+    margin-left: 30px;
+    button {
+        text-transform: none;
+        padding: 0 16px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0;
+        padding: 0;
+    }
+    h4 {
+        margin: 0 !important;
+    }
+}
+
+.label {
+    margin: 4px !important;
+    font-size: 17px;
+}
+.comment {
+    margin: 4px !important;
+    color: #707072 !important;
+    font-size: 12px;
+}
+.blue {
+    color: #039be5;
+}
+
+.mat-form-field.w50{
+    width: 100px !important;
+}
+
+.mat-form-field {
+
+    &.mat-form-field-appearance-outline {
+
+        .mat-form-field-outline {
+            top: 0;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        padding: 0;
+
+        .mat-form-field-infix {
+            border-top: 0;
+        }
+    }
+}

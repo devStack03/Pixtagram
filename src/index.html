@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+
+    <head>
+
+        <title>NewbieFans</title>
+        <base href="/">
+
+        <meta charset="utf-8">
+        <meta name="description" content="NewbieFans">
+        <meta name="keywords"    content="NewbieFans">
+        <meta name="author" content="Withinpixels">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <link rel="manifest" href="./manifest.json">
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link href="assets/icons/meteocons/style.css" rel="stylesheet">
+        <link href="assets/icons/material-icons/outline/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli:300,400,600,700" rel="stylesheet">
+
+        <!-- FUSE Splash Screen CSS -->
+        <style type="text/css">
+
+
+            #fuse-splash-screen {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #111827;
+                color: #F9FAFB;
+                z-index: 999999;
+                pointer-events: none;
+                opacity: 1;
+                visibility: visible;
+                transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            #fuse-splash-screen .center {
+                display: block;
+                width: 100%;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            #fuse-splash-screen .logo {
+                width: 128px;
+                margin: 0 auto;
+            }
+
+            #fuse-splash-screen .logo img {
+                filter: drop-shadow(0px 10px 6px rgba(0, 0, 0, 0.2))
+            }
+
+            #fuse-splash-screen .spinner-wrapper {
+                display: block;
+                position: relative;
+                width: 100%;
+                min-height: 100px;
+                height: 100px;
+            }
+
+            #fuse-splash-screen .spinner-wrapper .spinner {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: 40px;
+                width: 56px;
+            }
+
+            @-webkit-keyframes fuse-bouncedelay {
+                0%, 80%, 100% {
+                    -webkit-transform: scale(0)
+                }
+                40% {
+                    -webkit-transform: scale(1.0)
+                }
+            }
+
+            @keyframes fuse-bouncedelay {
+                0%, 80%, 100% {
+                    -webkit-transform: scale(0);
+                    transform: scale(0);
+                }
+                40% {
+                    -webkit-transform: scale(1.0);
+                    transform: scale(1.0);
+                }
+            }
+
+            body fuse-splash-screen .spinner .bounce1 {
+                -webkit-animation-delay: -0.32s;
+                animation-delay: -0.32s;
+            }
+            body fuse-splash-screen .spinner .bounce2 {
+                -webkit-animation-delay: -0.16s;
+                animation-delay: -0.16s;
+            }
+
+            body fuse-splash-screen .spinner > div {
+                width: 12px;
+                height: 12px;
+                background-color: #1E96F7;
+                border-radius: 100%;
+                display: inline-block;
+                -webkit-animation: fuse-bouncedelay 1s infinite ease-in-out both;
+                animation: fuse-bouncedelay 1s infinite ease-in-out both;
+            }
+        </style>
+        <!-- / FUSE Splash Screen CSS -->
+    </head>
+
+    <body>
+
+        <!-- FUSE Splash Screen -->
+        <fuse-splash-screen id="fuse-splash-screen">
+            <div class="logo">
+                <img width="128" src="assets/images/logos/logo.png">
+            </div>
+
+            <div class="spinner">
+                <div class="bounce1"></div>
+                <div class="bounce2"></div>
+                <div class="bounce3"></div>
+            </div>
+        </fuse-splash-screen>
+        <!-- / FUSE Splash Screen -->
+
+        <app></app>
+
+    </body>
+
+</html>

@@ -1,0 +1,112 @@
+@import "src/@fuse/scss/fuse";
+
+search-lists {
+    #search {
+        max-width: 600px;
+        width: 100%;
+        //background-color: #fff;
+        border: 1px solid #dbdbdb;
+        //margin: auto;
+
+        .header {
+            border-bottom: 1px solid;
+            border-color: #cccccc;
+            width: 100%;
+
+            .loading {
+                width: 20px;
+                height: 20px;
+            }
+
+            .search-field {
+                width: 100%;
+                margin: 8px 32px;
+                padding: 0 !important;
+
+                .mat-form-field-wrapper {
+                    padding: 0;
+                    margin: 0;
+            
+                    .mat-form-field-infix {
+                        border-top: 0.5em solid transparent;
+                        padding: 1em 0 1em 0.3em;
+                    }
+                }
+            }
+        }
+        .content {
+            .users {
+                width: 100%;
+                max-width: 740px;
+                //margin: px auto;
+                padding: 8px 20px;
+
+                .matchs-text {
+                    font-size: 18px;
+                    font-weight: 400;
+                    letter-spacing: .010em;
+                    padding: 10px 16px;
+                }
+
+                @include media-breakpoint('xs') {
+                    padding: 8px 4px;
+                }
+            
+
+                @include media-breakpoint('lt-md') {
+                    margin: 0 0;
+                    //padding: 0 0;
+                }
+
+                .no-courses {
+                    font-size: 24px;
+                    margin: 24px 0;
+                    text-align: center;
+                }
+
+                .user {
+                    white-space: normal;
+                    text-align: left;
+                    letter-spacing: .010em;
+                    min-height: 70px;
+                    border: 1px solid;
+                    padding: 8px;
+                    font-weight: 400;
+                    border-radius: 4;
+                    border-color: #cccccc;
+                    margin-bottom: 4px;
+
+                    @include media-breakpoint('xs') {
+                        margin-bottom: 4px;
+                        padding: 0 4px;
+                    }
+
+                    .username {
+                        font-size: 18px;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+
+                    .where {
+                        line-height: normal;
+                        margin-top: 0;
+                    }
+
+                    .time {
+                        font-size: 12px;
+                        margin-top: 4px;
+                    }
+                }
+
+
+                .avatar-wrapper {
+
+                    .avatar {
+                        margin-right: 16px;
+                    }
+                }
+
+            }
+        }
+    }
+}

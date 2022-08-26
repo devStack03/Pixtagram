@@ -1,0 +1,173 @@
+<!-- CHAT -->
+<div class="chat" fxFlex fxLayout="column">
+
+    <!-- CHAT TOOLBAR -->
+    <mat-toolbar class="chat-toolbar">
+
+        <div fxFlex fxLayout="row" fxLayoutAlign="space-between center">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <!-- RESPONSIVE CHATS BUTTON-->
+                <button mat-icon-button fxHide.gt-md class="responsive-chats-button mr-16"
+                        fuseMatSidenavToggler="chat-left-sidenav"
+                        aria-label="chats button">
+                    <mat-icon>chat</mat-icon>
+                </button>
+                <!-- / RESPONSIVE CHATS BUTTON-->
+
+                <!-- CHAT CONTACT-->
+                <div class="chat-contact" fxLayout="row" fxLayoutAlign="start center"
+                     fuseMatSidenavToggler="chat-right-sidenav" (click)="selectContact()" *ngIf="!this.selectedChat || !this.selectedChat.chatType">
+                    <div class="avatar-wrapper">
+                        <span *ngFor="let member of this.rimages" class="-ml-3 w-6 h-6">
+                            <img [src]="member" alt="Card cover image" class="w-6 h-6 m-0.5 rounded-full text-card ring-2 ring-white">
+                        </span>
+                        <div class="roomName">
+                            {{this.rname}}
+                        </div>
+                        <mat-icon class="s-16 status"
+                                  [ngClass]="contact.status">
+                        </mat-icon>
+                    </div>
+
+                    <div class="chat-contact-name">
+                        {{contact.name}}
+                    </div>
+                </div>
+                <div class="chat-contact" fxLayout="row" fxLayoutAlign="start center" *ngIf="this.selectedChat && this.selectedChat.chatType">
+                    <div class="avatar-wrapper">
+                        <span *ngFor="let member of this.rimages" class="-ml-3 w-6 h-6">
+                            <img [src]="member" alt="Card cover image" class="w-6 h-6 m-0.5 rounded-full text-card ring-2 ring-white">
+                        </span>
+                        <div class="roomName">
+                            {{this.rname}}
+                        </div>
+                        <mat-icon class="s-16 status"
+                                  [ngClass]="contact.status">
+                        </mat-icon>
+                    </div>
+
+                    <div class="chat-contact-name">
+                        {{contact.name}}
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="!this.selectedChat || !this.selectedChat.chatType">
+                <button mat-icon-button [matMenuTriggerFor]="contactMenu" aria-label="more">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #contactMenu="matMenu">
+                    <button mat-menu-item fuseMatSidenavToggler="chat-right-sidenav" (click)="selectContact()">
+                        Room Info
+                    </button>
+                </mat-menu>
+            </div>
+<!--            <div *ngIf="this.selectedChat && this.selectedChat.chatType">-->
+<!--                <button mat-icon-button class="close-button" (click)="closeChatView()" mat-dialog-close>-->
+<!--                    <mat-icon class="close-icon" color="warn">close</mat-icon>-->
+<!--                </button>-->
+<!--            </div>-->
+        </div>
+    </mat-toolbar>
+    <!-- / CHAT TOOLBAR -->
+
+    <!-- CHAT CONTENT -->
+    <div id="chat-content" fxFlex="1 1 auto"  fusePerfectScrollbar>
+
+        <!-- CHAT MESSAGES -->
+        <div class="chat-messages">
+
+            <!-- MESSAGE -->
+            <div *ngFor="let message of dialog; let i = index" class="message-row"
+                 [ngClass]="{
+                            'me': message.isSend ,
+                            'contact': !message.isSend,
+                            'first-of-group': isFirstMessageOfGroup(message, i),
+                            'last-of-group': isLastMessageOfGroup(message, i)
+                            }">
+
+                <img *ngIf="shouldShowContactAvatar(message, i)"
+                     [src]="message.from.avatar ? message.from.avatar:'assets/images/avatars/profile.jpg'"
+                     class="avatar">
+
+                <div class="bubble">
+                    <div class="message">{{message.message}}</div>
+                    <div class="media" *ngIf="message?.media">
+                        <img *ngIf="message?.message_type === 2 && !message?.blur"
+                             [src]="message?.media ? message?.media : 'assets/images/avatars/profile.jpg'">
+                        <div [style]="message?.message_type===3 ?'display: block' : 'display: none'" *ngIf="!message?.blur">
+                            <video #imgVideo id="singleVideo" preload="auto" controls style="max-width: 100%;">
+                                <source [src]="message?.media" type="video/3gpp">
+                            </video>
+                        </div>
+                        <div *ngIf="message?.blur" class="blur_content">
+                            <p>Click To View Image</p>
+                            <p>You will be charged {{message.postMediaFee}} tokens</p>
+                            <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" (click)="onPostPay(message)" *ngIf="!message?.loading">View</button>
+                            <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" [disabled] = true *ngIf="message?.loading">Loading...</button>
+                        </div>
+                        <img *ngIf="message?.blur"
+                             [src]="'assets/images/55685.jpg'"/>
+                    </div>
+                    <div class="time secondary-text">{{displayDate(message.time)}}</div>
+                </div>
+
+            </div>
+            <!-- / MESSAGE -->
+
+        </div>
+        <!-- CHAT MESSAGES -->
+
+    </div>
+    <!-- / CHAT CONTENT -->
+    <input id="chat_photo_input" name="chat_photo_input" hidden type="file" #photoInput
+           accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg, video/mp4, video/avi, video/3gpp"
+           (change)="onFileInput($event.target.files[0])">
+    <!-- CHAT FOOTER -->
+    <div class="chat-footer" fxFlex="0 0 auto" fxLayout="column">
+        <div fxLayout="row" class="photos">
+            <div fxLayout="row" class="has-handle">
+
+                <img #imgPhoto class="photo" [src]="'assets/images/avatars/profile.jpg'"
+                     [style]="message_type===2 ?'display: block' : 'display: none'">
+                <div [style]="message_type===3 ?'display: block' : 'display: none'">
+                    <video #imgVideo class="photo" preload="auto" controls style="max-width: 100%;">
+                        <source [src]="" type="video/3gpp">
+                    </video>
+                </div>
+                <mat-icon *ngIf="message_type === 2 || message_type === 3" class="remove" (click)="onRemovePhoto()">
+                    cancel</mat-icon>
+
+            </div>
+            <!-- REPLY FORM -->
+            <div class="reply-form" fxFlex="0 0 auto" fxLayout="row" fxLayoutAlign="center center">
+
+                <form #replyForm="ngForm"
+                      (ngSubmit)="reply($event)"
+                      (keydown.enter)="reply($event)"
+                      fxFlex fxLayout="row" fxLayoutAlign="start center">
+
+                    <mat-form-field class="message-text" fxFlex floatLabel="never" appearance="standard">
+                    <emoji-mart  class="emoji-mart" [showPreview]="false" set="twitter"  *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)" size="26"></emoji-mart>
+                    <textarea matInput #replyInput placeholder="Type your message"
+                              ngModel name="message" [rows]="1" [matTextareaAutosize]="true" [(ngModel)]="txt_msg"></textarea>
+                    </mat-form-field>
+                    <a (click) ="toggleEmojiPicker()" class="emoji-btn">😀</a>
+                    <button class="send-message-button" mat-icon-button type="submit" aria-label="Send message">
+                        <mat-icon class="secondary-text">send</mat-icon>
+                    </button>
+
+                </form>
+                <button class="add-button" mat-icon-button aria-label="Add Photo or Video"
+                        (click)="onOpenFile('chat_photo_input')">
+                    <mat-icon class="secondary-text">add_a_photo</mat-icon>
+                </button>
+            </div>
+            <!-- / REPLY FORM -->
+
+        </div>
+        <!-- / CHAT FOOTER-->
+
+    </div>
+    <!-- / CHAT -->

@@ -1,0 +1,187 @@
+@import "src/@fuse/scss/fuse";
+.username {
+    line-height: 18px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.fullname {
+    color: #999;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.userinfo {
+    margin-left: 12px;
+}
+
+.card-body {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin: 0 auto 30px;
+    max-width: 600px;
+    width: 100%;
+}
+
+.user-container {
+    background-color: transparent;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}
+
+.user-item {
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.user,
+.blank-space {
+    width: 100%;
+}
+
+.yQ0j1 {
+    color: #262626;
+    font-size: 16x;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 8px;
+    margin-top: 50px;
+    margin-left: 8px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.hUQXy,
+.hUQXy:visited {
+    color: #3897f0;
+}
+
+.HUW1v {
+    display: block;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.user-tables {
+    flex: 1 0 auto;
+}
+
+:host {
+    .discover-feed {
+        margin-top: 48px;
+        .period {
+            .period-title {
+                margin-bottom: 24px;
+                .name {
+                    font-size: 20px;
+                }
+                .info {
+                    margin-left: 16px;
+                    font-size: 15px;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+            }
+            .media {
+                margin: 8px 0 8px 0;
+                position: relative;
+                .preview {
+                    width: 280px;
+                    height: 280px;
+                    display: block;
+                }
+                .title {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 10;
+                    padding: 0 16px;
+                    height: 48px;
+                    line-height: 48px;
+                    background: rgba(0, 0, 0, 0.54);
+                    color: #FFF;
+                    font-size: 14px;
+                    font-weight: 600px;
+                }
+            }
+        }
+    }
+}
+
+.follow-button,
+.following-button {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    //display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    min-width: 72px;
+    line-height: 36px;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    overflow: visible;
+    transform: translate3d(0, 0, 0);
+    transition: background .4s cubic-bezier(.25, .8, .25, 1), box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    margin: 8px auto 8px auto;
+    background-color: #1e88e5;
+    //box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    color: white;
+    min-height: 32px;
+    outline-style: inset;
+}
+
+.following-button {
+    background-color: white;
+    border: 1px solid #666;
+    color: #000;
+    outline-style: inset;
+}
+
+.following-button:active {
+    background-color: #afafaf
+}
+
+.medium {
+    width: 64px;
+    min-width: 64px;
+    height: 64px;
+    line-height: 64px;
+    margin: 2px;
+    border: 1px solid rgba(0, 0, 0, .0975);
+}
+
+// @media (min-width: 640px)
+// .BSqtQ {
+//     padding-top: 60px;
+// }
+// @media (min-width: 736px)
+// .BSqtQ {
+//     -webkit-box-sizing: content-box;
+//     box-sizing: content-box;
+//     padding: 40px 20px 0;
+//     width: calc(100% - 40px);
+// }

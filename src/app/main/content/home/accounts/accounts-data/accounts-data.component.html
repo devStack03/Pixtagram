@@ -1,0 +1,268 @@
+    <div class="account-form" fxLayout="column">
+  <!-- Edit Profile -->
+  <div class="edit-profile px-16 py-0" fxFill *ngIf="activatedRoute == routes[0]" fxLayout="column"
+    fxLayoutAlign="space-between space-between">
+    <div class="profile-photo px-16 py-0" fxLayout="row" fxLayoutAlign="start center">
+      <div class="user-info" fxLayout="row" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+        fxLayoutAlign.gt-sm="start center">
+        <img class="profile-image avatar huge edit-avatar"
+          [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'"
+          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+      </div>
+      <div class="XX1Wc" fxLayout="column" fxLayoutAlign="center start">
+        <h4>{{user?.username}}</h4>
+        <input id="user-avatar-input" name="user-avatar-input" hidden type="file" #photoInput
+          accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg" (change)="onFileInput($event.target.files[0])">
+        <a class="submit-button" (click)="openDialog(); $event.preventDefault()" disableRipple #optionButton>Change
+          Profile Photo</a>
+      </div>
+    </div>
+    <form class="profile-form py-0" fxFill [formGroup]="profileForm" novalidate (ngSubmit)="onProfileSubmit()"
+      fxLayout="column" fxLayoutAlign="start">
+
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="this.hide">
+        <h3 class="label">User Name</h3>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="invisible">
+        <mat-form-field appearance="outline">
+          <input matInput placeholder="Username" formControlName="username" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="this.hide">
+        <h6 class="comment">Help people discover you by using the name your known by: either your full name, nickname or
+          business name.</h6>
+      </div>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" *ngIf="this.hide">
+        <h3 class="label">Website</h3>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto" class="invisible">
+        <mat-form-field flxFlex="100" appearance="outline">
+          <input matInput placeholder="Website" formControlName="website">
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">Email</h3>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field class="mt-8" appearance="outline">
+          <input matInput placeholder="xxx@gmail.com" name="email" formControlName="email" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">Gender</h3>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field fxFlex="100" appearance="outline">
+          <mat-select placeholder="Gender" formControlName="gender">
+            <mat-option value="0">
+              Female
+            </mat-option>
+            <mat-option value="1">
+              Male
+            </mat-option>
+            <mat-option value="2">
+              Optional
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">Bio</h3>
+      </div>
+
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field fxFlex="100" appearance="outline">
+          <textarea matInput placeholder="Bio" formControlName="bio">
+            1600 Amphitheatre Pkwy
+          </textarea>
+        </mat-form-field>
+      </div>
+
+<!--        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">-->
+<!--            <h3 class="label">Cost to view: (0 = free)</h3>-->
+<!--        </div>-->
+
+<!--        <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">-->
+<!--            <mat-form-field class="mt-8" appearance="outline">-->
+<!--                <input matInput placeholder="0" name="followFee" formControlName="followFee" type="number" maxlength="10"  required>-->
+<!--            </mat-form-field>-->
+<!--        </div>-->
+        <div class="p-4" fxLayout="row" fxLayoutAlign="start">
+            <h3 class="label">Followers</h3>
+        </div>
+        <mat-radio-group formControlName="following">
+            <div fxLayout="row">
+                <mat-radio-button value="0">
+                    <div>Allow users to follow me for free?</div>
+                </mat-radio-button>
+            </div>
+            <div fxLayout="row" >
+                <mat-radio-button value="1">
+                    <div >
+                        Charge &nbsp;&nbsp; <mat-form-field class="mt-8 w50" appearance="outline"><input matInput placeholder="0"  type="number" maxlength="10" class="followfee" formControlName="followfee"></mat-form-field>&nbsp;&nbsp;  per month for users to follow me.
+                    </div>
+                </mat-radio-button>
+            </div>
+       </mat-radio-group>
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" class="mt-8">
+        <h3 class="label">Notifications</h3>
+      </div>
+
+      <mat-checkbox aria-label="Turn on Notification" formControlName="showNotification">
+        <span class="accent-fg">Turn on Notifications</span>
+      </mat-checkbox>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h6 class="comment">Know right away when people follow you or like and comments on your photos.</h6>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxFlex="1 0 auto">
+        <button mat-raised-button class="submit-button w-60-p" color="accent"
+          [disabled]="profileForm.invalid || loading">Save</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Change Password -->
+  <div class="change-password px-16 py-0" fxFill *ngIf="activatedRoute == routes[1]" fxLayout="column"
+    fxLayoutAlign="space-between">
+    <div class="profile-photo" fxLayout="row" fxLayoutAlign="start center">
+      <div class="user-info" fxLayout="row" fxLayoutAlign="start center" fxLayout.gt-sm="row"
+        fxLayoutAlign.gt-sm="start center">
+        <img class="profile-image avatar huge edit-avatar"
+          [src]=" user?.avatar ? user.avatar :'assets/images/avatars/katherine.jpg'"
+          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+      </div>
+      <div class="XX1Wc" fxLayout="column" fxLayoutAlign="start center">
+        <h4>{{user?.username}}</h4>
+      </div>
+    </div>
+    <form class="password-form my-4" fxFill [formGroup]="passwordForm" novalidate (ngSubmit)="onPasswordSubmit()"
+      fxLayout="column" fxLayoutAlign="start">
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">Old Password</h3>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field flxFlex="100" appearance="outline">
+          <mat-icon matSuffix class="secondary-text">visibility_off</mat-icon>
+          <input matInput type="password" placeholder="Old Password" formControlName="oldPassword" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">New Password</h3>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field flxFlex="100" appearance="outline">
+          <mat-icon matSuffix class="secondary-text">visibility_off</mat-icon>
+          <input matInput type="password" placeholder="New Password" formControlName="newPassword" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h3 class="label">Confirm New Password</h3>
+      </div>
+      <div fxLayout="row" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <mat-form-field flxFlex="100" appearance="outline">
+          <mat-icon matSuffix class="secondary-text">visibility_off</mat-icon>
+          <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" required>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="center center" fxFlex="1 0 auto" class="m-16">
+        <button mat-raised-button color="accent" [disabled]="passwordForm.invalid || loading">Change Password</button>
+      </div>
+
+      <a class="forgot-password my-8" fxFill fxLayoutAlign="center center" [routerLink]="'/forgot-password'">
+        <h3>Forgot your password?</h3>
+      </a>
+    </form>
+  </div>
+
+  <!-- Privacy And Security -->
+  <div class="privacy-security px-16 py-0" fxFill *ngIf="activatedRoute == routes[2]" fxLayout="column"
+    fxLayoutAlign="space-between space-between">
+    <div class="profile-photo px-16 py-0" fxLayout="row" fxLayoutAlign="start center">
+      <div class="user-info" fxLayout="row" fxLayoutAlign="center center" fxLayout.gt-sm="row"
+        fxLayoutAlign.gt-sm="start center">
+        <img class="profile-image avatar huge edit-avatar"
+          [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'"
+          [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+      </div>
+      <div class="XX1Wc" fxLayout="column" fxLayoutAlign="center start">
+        <h4>{{user?.username}}</h4>
+        <input id="user-avatar-input" hidden type="file" #photoInput
+          accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg" (change)="onFileInput($event.target.files[0])">
+      </div>
+    </div>
+    <form class="profile-form py-0" fxFill [formGroup]="privacyForm" novalidate (ngSubmit)="onPrivacySubmit()"
+      fxLayout="column" fxLayoutAlign="start">
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" class="mt-16">
+        <h3 class="label">Privacy Settings</h3>
+      </div>
+
+      <mat-checkbox aria-label="Private Account" formControlName="isPrivate">
+        <span class="accent-fg">Private Account</span>
+      </mat-checkbox>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h6 class="comment">Only people you approve can see your posts. Our existing followers will not be affected if
+          you change this setting.</h6>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" class="mt-16">
+        <h3 class="label">Activity Status</h3>
+      </div>
+
+      <mat-checkbox aria-label="Activity Status" formControlName="showActivity">
+        <span class="accent-fg">Show Activity Status</span>
+      </mat-checkbox>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h6 class="comment">Allow people to see when you were last active.</h6>
+      </div>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" class="mt-16">
+        <h3 class="label">Sharing</h3>
+      </div>
+
+      <mat-checkbox aria-label="Sharing" color="accent" formControlName="allowSharing">
+        <span class="accent-fg">Allow Sharing</span>
+      </mat-checkbox>
+
+      <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto">
+        <h6 class="comment">Allow people share your posts and messages.</h6>
+      </div>
+
+      <a class="change-password mt-16" fxFill fxLayoutAlign="start center" [routerLink]="'/accounts/change-password'">
+        <h3>Change Password</h3>
+      </a>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button mat-raised-button color="accent" class="submit-button w-60-p" [disabled]="loading">Save</button>
+      </div>
+
+    </form>
+  </div>
+  <div class="email-sms" *ngIf="activatedRoute == routes[3]">
+
+  </div>
+  <div class="manage-contact" *ngIf="activatedRoute == routes[4]">
+
+  </div>
+  <div class="privacy-policy" *ngIf="activatedRoute == routes[5]">
+
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="page-layout carded fullWidth" fxLayout="row" fxLayoutAlign="center">
+    <div class="settings">
+        <div class="content p-16 w-100-p" fxLayout="row" fxLayoutAlign="space-between">
+            <block-ui class="w-100-p" fxLayout="row " fxLayoutAlign="center">
+                <form class="w-100-p"  novalidate fxLayout="column" fxLayoutAlign="start" [formGroup]="profileForm" novalidate (ngSubmit)="onSubmit()">
+                    <div class="p-4" fxLayout="row" fxLayoutAlign="start">
+                        <h3 class="label">Followers</h3>
+                    </div>
+                    <mat-radio-group formControlName="following">
+                        <div fxLayout="row">
+                            <mat-radio-button value="0">
+                                <div>Allow users to follow me for free?</div>
+                            </mat-radio-button>
+                        </div>
+                        <div fxLayout="row">
+                            <mat-radio-button value="1">
+                                <div >
+                                    Charge &nbsp;&nbsp; <mat-form-field class="mt-8" appearance="standard"><input matInput placeholder="0"  type="number" maxlength="10" class="followfee" formControlName="followfee"></mat-form-field>&nbsp;&nbsp;  per month for users to follow me.
+                                </div>
+                            </mat-radio-button>
+                        </div>
+                    </mat-radio-group>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <button mat-raised-button class="submit-button w-60-p" color="accent"
+                                [disabled]="profileForm.invalid || loading">Save</button>
+                    </div>
+                </form>
+            </block-ui>
+        </div>
+    </div>
+</div>

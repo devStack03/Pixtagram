@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>Report</h2>
+<mat-dialog-content class="mat-typography">
+    <h3>{{data.title}}</h3>
+    <div class="media" *ngIf="data?.media">
+        <img *ngIf="data?.type === 2"
+             [src]="data?.media ? data?.media : 'assets/images/avatars/profile.jpg'">
+        <vg-player *ngIf="data?.type === 3">
+            <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                <source [src]="data?.media" type="video/3gpp">
+            </video>
+        </vg-player>
+    </div>
+
+    <p *ngIf="data?.description">{{data.description}} <b>replied by admin</b></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

@@ -1,0 +1,11 @@
+<div  class="dialog-content-wrapper"  fxLayout="column" fxLayoutAlign="center center">
+    
+    <img class="profile-image avatar huge" [src]="user?.avatar ? user?.avatar : 'assets/images/avatars/profile.jpg'">
+    <span class="message">
+        Unfollow @{{user?.username}} ?
+    </span>
+    <button mat-button class="unfollow" (click)="dialogRef.close(true)">Unfollow</button>
+    <button mat-button class="cancel" (click)="dialogRef.close(false)">Cancel</button>
+        
+</div>
+

@@ -1,0 +1,75 @@
+@import "src/@fuse/scss/fuse";
+
+profile-posts {
+
+    #photos-videos {
+        margin-bottom: 16px;
+
+        .no-courses {
+            font-size: 32px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .loading-courses {
+            font-size: 24px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .media {
+            position: relative;
+            margin: 0 8px 8px 0;
+            border-radius: 4px;
+            width: 111px;
+            height: 111px;
+            border: 1px solid #c0c0c0;
+            cursor: pointer;
+            //display: block;
+            overflow: hidden;
+            background: #dbdbdb;
+
+            .preview {
+                display: block;
+                width: 111px;
+                height: 111px;
+                object-fit: cover;
+            }
+
+            .more-info {
+                position: absolute;
+                top: 0;
+                right: 0;
+                z-index: 10;
+                line-height: 20px;
+                height: 20px;
+                width: 20px;
+                padding: 0;
+            }
+
+            .type {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                padding: 0 36px;
+                height: 112px;
+                line-height: 112px;
+                font-size: 40px;
+            }
+
+            .video-play {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: 10;
+                padding: 0 36px;
+                height: 112px;
+                line-height: 112px;
+                font-size: 40px;
+            }
+        }
+    }
+}

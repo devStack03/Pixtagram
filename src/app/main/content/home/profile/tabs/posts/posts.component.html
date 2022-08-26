@@ -1,0 +1,95 @@
+<div id="photos-videos" class="p-8" fxLayout="row" fxLayoutAlign="center center">
+
+    <!-- <mat-divider></mat-divider> -->
+    <!-- <div class="no-courses" *ngIf="!loading && posts.length === 0">
+        No posts found!
+    </div> -->
+    <div class="loading-courses" *ngIf="loading">
+        Loading...
+    </div>
+
+    <div class="period-media" fxLayout="row wrap">
+        <div class="media" *ngFor="let post of posts">
+            <button mat-icon-button [matMenuTriggerFor]="postInfo" class="more-info">
+                <mat-icon class="s-20">more_horiz</mat-icon>
+            </button>
+
+            <mat-menu #postInfo="matMenu" [overlapTrigger]="false">
+
+                <button mat-menu-item (click)="onDeletePost(post)" *ngIf="this.currentUser?.id === post.owner._id">
+                    <span>Delete</span>
+                </button>
+
+                <button mat-menu-item (click)="onShareClicked()">
+                    <span>Share</span>
+                </button>
+
+                <button mat-menu-item class="">
+                    <span>Copy</span>
+                </button>
+
+            </mat-menu>
+
+            <div *ngIf="post?.type === 1 && !post.blur" (click)="onPostClicked(post)">
+                <mat-icon class="type">filter_hdr</mat-icon>
+            </div>
+            <div *ngIf="post?.type === 2 && !post.blur" (click)="onPostClicked(post)">
+                <img class="preview" [src]="post?.media ? post?.media : 'assets/images/avatars/profile.jpg'">
+            </div>
+            <div *ngIf="post?.type === 3 && !post.blur" (click)="onPostClicked(post)">
+                <vg-player class="preview" *ngIf="post?.type === 3">
+                    <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                        <source [src]="post?.media" type="video/3gpp">
+                    </video>
+                </vg-player>
+                <mat-icon class="video-play">play_circle_filled</mat-icon>
+            </div>
+            <div *ngIf="post.blur" class="blur_content">
+                <p>Click To View Image</p>
+                <p>You will be charged {{post.fee}} tokens</p>
+                <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" (click)="onPostPay(post)" *ngIf="!post?.loading">View</button>
+                <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" [disabled] = true *ngIf="post?.loading">Loading...</button>
+            </div>
+            <div *ngIf="post.blur">
+                <img [src]="'assets/images/55685.jpg'">
+            </div>
+        </div>
+    </div>
+
+    <ng-template #socialShareDialog class="dialog-content-wrapper">
+        <h2 style="margin-top: 0px;">
+            <mat-icon class="secondary-text s-20 mr-8">share</mat-icon> Sharing...
+        </h2>
+
+        <mat-dialog-content class="cropper-content" class="cropper-content">
+            <div class="share-items">
+                <button mat-button [socialShare]="'fb'" class="share-item" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="social-img" src="assets/images/social/facebook.svg" />
+                    <span>Facebook </span>
+                </button>
+
+                <button mat-button [socialShare]="'tw'" class="share-item" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="social-img" src="assets/images/social/twitter.svg" />
+                    <span>Twitter </span>
+                </button>
+
+                <button mat-button [socialShare]="'in'" class="share-item" fxLayout="row" fxLayoutAlign="start center">
+                    <img class="social-img" src="assets/images/social/linkedin.svg" />
+                    <span>Linkdedin </span>
+                </button>
+                <!--
+                <div [socialShare]="'tr'">Tumblr</div>
+                <div [socialShare]="'rd'">Reddit</div>
+                <div [socialShare]="'pn'">Pinterest</div>
+    -->
+            </div>
+        </mat-dialog-content>
+        <!--
+        <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" style="margin-top: -10px;">
+            <button mat-button (click)="onGiveTipClick()" color="accent" [disabled]="giveTipAmountInput.value <= 0">Give</button>
+            <button mat-button (click)="giveTipDialogRef.close()" color="primary">Cancel</button>
+        </mat-dialog-actions>
+        -->
+        <!--<button mat-button (click)="onImageCropClose">OK</button> -->
+    </ng-template>
+</div>

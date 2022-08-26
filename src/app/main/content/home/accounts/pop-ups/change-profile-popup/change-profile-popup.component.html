@@ -1,0 +1,11 @@
+<div class="popup-container">
+  <div class="popup-title">
+    <h4>Change Profile Photo</h4>
+  </div>
+  <mat-grid-list cols="1" rowHeight="50px">
+    <mat-grid-tile *ngFor="let tile of tiles; let i = index" [colspan]="tile.cols" [rowspan]="tile.rows">
+      <button [style.color]="tile.color" class="title-button" [ngClass]="{'title-button' : i < 2, 'cancel-button': i == 2}" (click)="onClickTitle(i)">{{tile.text}}</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>

@@ -1,0 +1,26 @@
+<div id="notification" fxLayout="column" fusePerfectScrollbar fxLayoutAlign="center center">
+
+    <div id="notification-form" fxLayout="column" fxLayoutAlign="center center">
+
+        <mat-icon role="img" class="mat-icon notranslate secondary-text s-96 material-icons mat-icon-no-color" fxLayoutAlign="center" aria-hidden="true" data-mat-icon-type="font">
+            notifications
+        </mat-icon>
+
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto"  class="m-12">
+            <h1 class="title">Turn on Notifications</h1>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutAlign="start center" fxFlex="1 0 auto" class="m-12">
+            <h3 class="comment">Know right away when people follow you or like and comments on your photos</h3>
+        </div>
+        
+
+        <button mat-raised-button color="accent" class="submit-button w-120-p" (click)="onTurnOn(true)" aria-label="Turn on"  class="m-12">
+            Turn on
+        </button>
+        <button mat-raised-button color="primary" class="submit-button w-120-p" (click)="onTurnOn(false)" aria-label="Not now" >
+            Not now
+        </button>
+    </div>
+
+</div>

@@ -1,0 +1,81 @@
+<mat-sidenav-container>
+    <mat-sidenav class="sidenav" position="start" opened="true" mode="side"
+                 fuseMatSidenavHelper="app-chat-left-sidenav" matIsLockedOpen="gt-md">
+        <app-chat-left-sidenav></app-chat-left-sidenav>
+    </mat-sidenav>
+    <div class="page-layout blank" fusePerfectScrollbar fxLayout="row" fxLayoutAlign="center"
+         infiniteScroll
+         [infiniteScrollDistance]="1"
+         [infiniteScrollThrottle]="50"
+         [infiniteScrollContainer]="'#container-3'"
+         [fromRoot]="true"
+         (scrolled)="onScroll()">
+        <div id="message-room">
+            <div class="content">
+                <div class="rooms" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}"
+                     *ngIf="rooms.length !== 0">
+
+                    <span class="messages-text" [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+          Messages
+        </span>
+                    <button mat-button class="room" *ngFor="let room of rooms" [@animate]="{value:'*',params:{y:'100%'}}"
+                            (click)="onRoomClicked(room)" [long-press] (onRelease)="onLongPressed(room)">
+
+                        <div fxLayout="row" fxLayoutAlign="start center">
+
+                            <div class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+                                <img src="{{room?.receiver?.avatar ? room.receiver.avatar : 'assets/images/avatars/katherine.jpg'}}"
+                                     class="avatar" />
+                                <!--              <div class="new-message" *ngIf="room?.hasNewMsg"></div>-->
+                            </div>
+
+                            <div fxLayout="row" fxFlex>
+
+                                <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                                    <div class="username">{{room?.receiver?.username}}</div>
+                                    <div class="msg">{{room?.lastMessage | sliceLine}}</div>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start end">
+                                    <div class="time">{{formatFromNow(room?.lastActiveDate)}}</div>
+                                    <div>
+                                        <mat-icon *ngIf="room?.lastMessage_type > 1" class="s-16 pr-8">attach_file</mat-icon>
+                                        <div *ngIf="room?.hasNewMsg"  class="mt-4 unread-message-count accent">{{room.hasNewMsg}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="loading-courses pt-200" *ngIf="loading" fxLayout="column" fxLayoutAlign="center center">
+                <img src="assets/images/loading/loading-spinner-blue.gif" class="loading mt-16" />
+                Loading...
+            </div>
+
+            <div class="p-16 pt-200" *ngIf="!loading && rooms.length === 0" fxLayout="column" fxLayoutAlign="center center">
+
+                <div class="fuse-card p-16" fxLayout="column" fxLayoutAlign="center center">
+                    <div class="p-16" fxLayout="column" fxLayoutAlign="center center">
+
+          <span class="message-circle-icon" fxLayout="row" fxLayoutAlign="center center">
+            <mat-icon>sms</mat-icon>
+          </span>
+
+                        <div class="p-16" fxLayout="row" fxLayoutAlign="center center">
+            <span class="text-center">When people send you a message<br />it will appear here<br /><br />No
+              Messages.</span>
+                        </div>
+                    </div>
+
+                    <a mat-button class="my-theme-color" routerLink="/new-message" fxLayout="row" fxLayoutAlign="start center">
+                        Send a message
+                    </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</mat-sidenav-container>

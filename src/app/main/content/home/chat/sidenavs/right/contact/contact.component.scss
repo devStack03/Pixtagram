@@ -1,0 +1,35 @@
+@import "src/@fuse/scss/fuse";
+
+chat-contact-sidenav {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+
+    mat-toolbar {
+
+        .toolbar-bottom {
+            height: 120px;
+        }
+    }
+
+    .sidenav-content{
+        .groupname{
+            width: calc(100% - 159px);
+        }
+
+        .creator{
+            .user_alias{
+                color: #8e8e8e;
+                font-size: 11px;
+            }
+        }
+
+        .members{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+    }
+}

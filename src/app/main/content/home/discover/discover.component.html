@@ -1,0 +1,103 @@
+<div class="page-layout carded fullWidth">
+    <div class="logo my-12 m-sm-0" fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="start center">
+        <div fxFlex="50%">
+            <span class="logo-text h1" [@animate]="{value: '*', params: {delay: '100ms', x: '-25px'}}">
+        <p></p>
+      </span>
+        </div>
+        <!-- <div fxFlex="50%" class="add-client col-3" fxLayout="row" fxLayoutAlign="end center">
+                  <mat-icon>add_circle_outline</mat-icon>
+                  <button mat-button (click)="onClickNewEventBtn">Add a New event</button>
+              </div> -->
+    </div>
+    <div class="card-block">
+        <div class="card-body">
+            <div class="discover-people" fxHide fxShow.gt-xs>
+                <h2 class="yQ0j1">Discover People
+                    <a class="HUW1v hUQXy" [routerLink]="'people/'" >
+            See All
+            <span class="coreSpriteChevronRight Rj5u6"></span>
+          </a>
+                </h2>
+                <div class="user-tables" fxLayout="row" fxLayoutAlign="space-between center">
+                    <div class="price-table style-1 mat-elevation-z1" fxLayout="column" *ngFor="let user of people">
+                        <div class="price" fxLayout="row" fxLayoutAlign="center start">
+                            <img class="profile-image avatar huge" [src]="user?.avatar ? user?.avatar : 'assets/images/avatars/katherine.jpg'" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                        </div>
+                        <div class="terms" fxLayout="column">
+                            <div class="term">
+                                <span class="text-bold">{{user?.username}}</span>
+                            </div>
+
+                        </div>
+                        <div *ngIf="!user?.isFollowing">
+                            <button *ngIf="!user?.isUpdating" mat-button class="follow-button" (click)="onFollow(user)">
+                                Follow
+                            </button>
+
+                            <button *ngIf="user?.isUpdating" mat-button class="follow-button">
+                                <img src="assets/images/loading_white.gif" />
+                            </button>
+                        </div>
+                        <div *ngIf="user?.isFollowing">
+                            <button *ngIf="!user?.isUpdating" (click)="onUnfollow(user)" mat-button class="following-button">
+                                Following
+                            </button>
+
+                            <button *ngIf="user?.isUpdating" mat-button class="following-button">
+                                <img src="assets/images/loading.gif" />
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="discover-feed">
+                <h2 class="yQ0j1">Explore</h2>
+                <div class="period">
+                    <mat-grid-list cols="3" gutterSize="30px">
+                        <mat-grid-tile *ngFor="let post of posts; let i = index" [colspan]="1" [rowspan]="1">
+                            <!--<div class="media">
+                                <img class="preview" [src]="post?.media ? post?.media : 'assets/images/etc/mountain-lake.jpg'" (click)="openPost(i)" />
+                            </div>-->
+                            <div class="content">
+                                <div class="media">
+                                    <a class="feed-caption" (click)="openPost(i)">
+                                        <div class="feed-caption-bottom">
+                                            <img class="preview" [src]="post?.media ? post?.media : 'assets/images/etc/mountain-lake.jpg'" />
+                                        </div>
+                                        <div class="feed-caption-top">
+                                            <div class="feed-likes-container">
+                                                <div class="feed-likes-content">
+                                                    <div class="feed-icons">
+                                                        <mat-icon>favorite</mat-icon>
+                                                    </div>
+                                                    <div class="feed-like-nums">
+                                                        {{getFormattedNumber(post.likeCount ? post.likeCount : 0)}}
+                                                    </div>
+                                                    <div class="feed-icons">
+                                                        <mat-icon>comment</mat-icon>
+                                                    </div>
+                                                    <div class="feed-comment-nums">
+                                                        {{getFormattedNumber(post.commentCount ? post.commentCount : 0)}}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </mat-grid-tile>
+                    </mat-grid-list>
+                    <div *ngIf="loading" style="text-align:center">
+                        <span>
+                          <img src="assets/images/loading.gif"/>  
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

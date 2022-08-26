@@ -1,0 +1,70 @@
+<div class="page-layout carded fullWidth" fxLayout="row" fxLayoutAlign="center">
+  <div class="new-post">
+    <div class="content p-16 w-100-p" fxLayout="row" fxLayoutAlign="space-between">
+      <block-ui class="w-100-p" fxLayout="row " fxLayoutAlign="center">
+        <form class="w-100-p" [formGroup]="postForm" novalidate fxLayout="column" fxLayoutAlign="start">
+          <input id="post_photo_input" name="post_photo_input" hidden type="file" #photoInput
+            accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg, video/mp4, video/avi, video/3gpp"
+            (change)="onFileInput($event.target.files[0])">
+
+<!--          <div class="separate-bar" fxLayout="row" fxLayoutAlign="center center"></div>-->
+
+          <div class="p-4" fxLayout="row" fxLayoutAlign="start">
+            <h3 class="label">Photo or Video</h3>
+          </div>
+
+          <div fxLayout="row" fxLayoutAlign="center center">
+            <div class="media" fxLayout="row" (click)="onOpenFile('post_photo_input')">
+              <div *ngIf="postType===1" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <mat-icon class="s-60">add_photo_alternate</mat-icon>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                  <span class="s-30">Upload</span>
+                </div>
+              </div>
+              <img #imgPhoto [src]="'assets/images/avatars/profile.jpg'"
+                [style]="postType===2 ?'display: block' : 'display: none'">
+              <div [style]="postType===3 ?'display: block' : 'display: none'">
+                <video #imgVideo id="singleVideo" preload="auto" controls style="max-width: 100%;">
+                  <source [src]="" type="video/3gpp">
+                </video>
+              </div>
+            </div>
+          </div>
+          <div class="separate-bar" fxLayout="row" fxLayoutAlign="start center"></div>
+            <div fxLayout="row" class="ml-60 w-250 mt-15">
+                <mat-form-field  appearance="outline" class="pb-small">
+                    <mat-label>Price in Nudles to view: (0=free)</mat-label>
+                    <input matInput placeholder="0" formControlName="fee" required type="number" maxlength="10">
+                </mat-form-field>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center" class="ml-60">
+                <h3 class="label">Post to</h3>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start" class="ml-60">
+                <mat-radio-group aria-label="Select an option" formControlName="feedon">
+                    <mat-radio-button value="1">Main feed</mat-radio-button> &nbsp;&nbsp;&nbsp;
+                    <mat-radio-button value="2">Only my followers</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div fxLayout="row" class="mt-15">
+                <img class="avatar post-avatar" [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'"
+                     [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+                <mat-form-field appearance="outline">
+                    <textarea matInput placeholder="Write a Caption..." formControlName="title"></textarea>
+                </mat-form-field>
+            </div>
+
+          <div class="pt-20" fxLayout="row" fxLayoutAlign="center center">
+            <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" [disabled]="postForm.invalid"
+              (click)="onSubmit()">Share</button>
+          </div>
+        </form>
+      </block-ui>
+    </div>
+  </div>
+
+  <div class="center">
+  </div>
+</div>

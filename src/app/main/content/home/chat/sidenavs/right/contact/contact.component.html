@@ -1,0 +1,106 @@
+<!-- SIDENAV HEADER -->
+<div class="sidenav-header" *ngIf="contact">
+
+    <!-- CONTACT TOOLBAR -->
+    <mat-toolbar class="accent">
+
+        <!-- TOOLBAR TOP -->
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+
+            <div>Room Info</div>
+
+            <button mat-icon-button fuseMatSidenavToggler="chat-right-sidenav" aria-label="close">
+                <mat-icon>close</mat-icon>
+            </button>
+
+        </mat-toolbar-row>
+        <!-- / TOOLBAR TOP -->
+
+        <!-- TOOLBAR BOTTOM -->
+        <mat-toolbar-row class="toolbar-bottom" fxLayout="column" fxLayoutAlign="center center">
+<!--            <img [src]="contact?.avatar ? contact.avatar : 'assets/images/avatars/profile.jpg'" class="avatar contact-avatar huge" alt="{{contact.firstName}} {{contact.lastName}}"/>-->
+            <div fxLayout="row">
+                <span *ngFor="let member of contact.contact.slice(0, 4);" class="-ml-40 w-70 h-70">
+                    <img [src]="member.avatar ? member.avatar: 'assets/images/avatars/profile.jpg'" alt="Card cover image" class="w-70 h-70 m-0.5 rounded-full text-card ring-2 ring-white">
+                </span>
+            </div>
+        </mat-toolbar-row>
+        <!-- / TOOLBAR BOTTOM -->
+
+    </mat-toolbar>
+    <!-- / CONTACT TOOLBAR -->
+</div>
+
+<!-- SIDENAV CONTENT -->
+<div class="sidenav-content py-32 px-24" fxFlex fxLayout="column" *ngIf="contact">
+
+    <div  fxLayout="row">
+        <p>Group Name : &nbsp;</p>
+        <input matInput placeholder="Add..." #searchField class="groupname"  [(ngModel)]="roomname">
+        <button mat-button [disabled]="roomname == origin_name" (click)="addGroup()">Add</button>
+    </div>
+    <div class="separate-bar" fxLayout="row" fxLayoutAlign="center center"></div>
+    <div class="flex-container px-12"
+         fxLayout="row"
+         fxLayoutAlign="space-between center">
+        <h3 class="label text-bold flex-item">Members </h3>
+        <div class="flex-item"><button mat-button color="accent" (click)="onComposeChatClicked()"
+        *ngIf="this.contact?.currentUserId === this.contact.chat_creator._id">Add People</button></div>
+    </div>
+    <div class="user" fxLayout="row" fxLayoutAlign="left center" *ngIf="this.contact.chat_creator" class="creator">
+        <a [routerLink]="'/users/' + this.contact.chat_creator._id">
+            <img class="avatar"
+                 [src]="this.contact.chat_creator.avatar ? this.contact.chat_creator.avatar : 'assets/images/avatars/profile.jpg'">
+        </a>
+        <div fxLayout="column">
+            <div class="title pl-8">
+                <a class="owner-name" [routerLink]="'/users/' + this.contact.chat_creator._id">
+                    <span class="username">{{this.contact.chat_creator.username}}</span>
+                    <div class="user_alias">Admin</div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div *ngFor="let member of this.member_list" fxLayout="row" fxLayoutAlign="left center" class="members" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="left center">
+            <a [routerLink]="'/users/' + member._id">
+                <img class="avatar"
+                     [src]="member.avatar ? member.avatar : 'assets/images/avatars/profile.jpg'">
+            </a>
+            <div>
+                <div class="title pl-8">
+                    <a class="owner-name" [routerLink]="'/users/' + member._id">
+                        <span class="username">{{member.username}}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="this.contact?.currentUserId === this.contact.chat_creator._id">
+            <button mat-icon-button [matMenuTriggerFor]="moreMenu" aria-label="More"
+                    (click)="$event.stopPropagation();">
+                <mat-icon class="secondary-text">more_horiz</mat-icon>
+            </button>
+            <mat-menu #moreMenu="matMenu">
+                <button mat-menu-item aria-label="remove" (click)="removeGroup(member._id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Remove From Group</span>
+                </button>
+            </mat-menu>
+
+        </div>
+    </div>
+    <div class="separate-bar" fxLayout="row" fxLayoutAlign="center center"></div>
+    <div fxLayout="column" fxFlex>
+        <div fxLayout="row">
+            <button mat-button color="warn"
+                    *ngIf="this.contact?.currentUserId !== this.contact.chat_creator._id"
+                    (click)="controlRoom('leave')">Leave Chat</button>
+        </div>
+        <div fxLayout="row">
+            <button mat-button color="warn"
+                    *ngIf="this.contact?.currentUserId === this.contact.chat_creator._id"
+                    (click)="controlRoom('delete')"
+            >Delete Chat</button>
+        </div>
+    </div>
+</div>

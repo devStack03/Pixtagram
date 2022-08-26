@@ -1,0 +1,20 @@
+<div class="page-layout carded fullWidth"
+        infiniteScroll
+          [infiniteScrollDistance]="1"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollContainer]="'#container-3'"
+          [fromRoot]="true"
+          (scrolled)="onScroll()">
+    <div class="logo my-12 m-sm-0" fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutAlign="start center" >
+        <div fxFlex="50%">
+            <span class="logo-text h1" [@animate]="{value: '*', params: {delay: '100ms', x: '-25px'}}">
+                <p >All Posts</p>
+            </span>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="card-body" >
+            <profile-feed-format  #viewAllPosts [posts]="posts" [currentUser]="user" [user]="user" [loading]="loading" [returnParams]="returnParams"></profile-feed-format>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div id="login" fxLayout="column" fusePerfectScrollbar>
+    <block-ui>
+        <div id="login-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+            <div id="login-form" *fuseIfOnDom [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+                <div class="logo">
+                    <img src="assets/images/logos/logo.png">
+                </div>
+
+
+                <form name="loginForm" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()" fxLayout="column" >
+
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Username or email</mat-label>-->
+<!--                        <input matInput placeholder="Username or email" formControlName="email">-->
+<!--                        <mat-error *ngIf="loginFormErrors.email.required">-->
+<!--                            Username or email is required!-->
+<!--                        </mat-error>-->
+<!--                    </mat-form-field>-->
+
+<!--                    <mat-form-field appearance="outline">-->
+<!--                        <mat-label>Password</mat-label>-->
+<!--                        <input matInput placeholder="Password" type="password" formControlName="password">-->
+<!--                        <mat-icon matSuffix class="secondary-text">visibility_off</mat-icon>-->
+<!--                        <mat-error *ngIf="loginFormErrors.password.required">-->
+<!--                            Password is required!-->
+<!--                        </mat-error>-->
+<!--                    </mat-form-field>-->
+
+<!--                    <mat-error *ngIf="errorOccurred">-->
+<!--                        {{error}}-->
+<!--                    </mat-error>-->
+
+                    <div class="remember-forgot-password" fxLayout="column" fxLayoutAlign="space-between">
+
+<!--                        <a class="forgot-password" href="/forgot-password">-->
+<!--                            Forgot your password?-->
+<!--                        </a>-->
+
+<!--                        <mat-checkbox class="remember-me" aria-label="Remember Me" formControlName="rememberCheckbox">-->
+<!--                            Remember me?-->
+<!--                        </mat-checkbox>-->
+
+                    </div>
+
+<!--                    <button mat-raised-button color="accent" class="submit-button w-30-p" aria-label="Log In" [disabled]="loginForm.invalid">-->
+<!--                        Log In-->
+<!--                    </button>-->
+
+                </form>
+
+<!--                <div class="separator">-->
+<!--                    <span class="text">OR</span>-->
+<!--                </div>-->
+
+                <div fxLayout="column" fxLayoutAlign="center">
+<!--                    <div fxLayout="row " fxLayoutAlign="center" class="mb-3">-->
+<!--                        <img class="mat-tooltip-trigger social-image" src="assets/images/social/googleplus.png" fxLayoutAlign="left"/>-->
+<!--                        <a class="hand-cursor link w-50-p" (click)="onClickLoginWithGoogle()" fxLayoutAlign="right center">-->
+<!--                            Log in with Google-->
+<!--                        </a>-->
+<!--                    </div>-->
+                    <div fxLayout="row " fxLayoutAlign="center center">
+                        <img class="mat-tooltip-trigger social-image" src="assets/images/social/nn.jpg" fxLayoutAlign="left"/>
+                        <a class="hand-cursor link w-50-p"  fxLayoutAlign="right center" id="loginwithz">
+                            Log in with NN Network
+                        </a>
+                    </div>
+                </div>
+
+<!--                <div class="register" fxLayout="row" fxLayoutAlign="center center">-->
+<!--                    <span class="text">Don't have an account?</span>-->
+<!--                    <a class="link" href="/signup">Sign Up</a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </block-ui>
+</div>

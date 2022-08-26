@@ -1,0 +1,49 @@
+<div class="page-layout carded fullWidth" fxLayout="column"
+          infiniteScroll
+          [infiniteScrollDistance]="1"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollContainer]="'#container-3'"
+          [fromRoot]="true"
+          (scrolled)="onScroll()">
+
+  <div id="new-message">
+    <div *ngIf="this.selectedUsers.length > 0" class="chatusers">
+        <div class="ng-tns-juy">
+            <button mat-stroked-button color="accent" *ngFor="let u of this.selectedUsers" (click)="onUserClicked(u, false)">
+                {{u.username}} &nbsp;<mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div fxLayout="row" class="px-12 search-panel">
+      <h3 class="label text-bold">To : </h3>
+      <input matInput placeholder="Search..." #searchField (keyup)="onSearch($event)">
+    </div>
+
+    <div class="flex-container px-12"
+         fxLayout="row"
+         fxLayoutAlign="space-between center">
+        <h3 class="label text-bold flex-item">Matches </h3>
+        <div class="flex-item"><button mat-button color="accent" [disabled]="!this.selectedUsers.length" class="next_btn" (click)="addGroup()">Next</button></div>
+    </div>
+
+    <div fxLayout="column">
+      <button class="kudo" mat-button *ngFor="let user of users" [@animate]="{value:'*',params:{y:'100%'}}"
+        (click)="onUserClicked(user)">
+
+        <div fxLayout="row" fxLayoutAlign="start center">
+          <div class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+            <img src="{{user?.avatar ? user?.avatar : 'assets/images/avatars/katherine.jpg'}}" class="avatar" />
+          </div>
+
+          <div fxLayout="row" fxFlex fxLayoutAlign="start center">
+            <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+              <div class="username">{{user.username}}</div>
+            </div>
+            <mat-icon *ngIf="!user.selected">brightness_1</mat-icon>
+            <mat-icon *ngIf="user.selected">check_circle</mat-icon>
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

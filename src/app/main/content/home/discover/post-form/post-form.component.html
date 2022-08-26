@@ -1,0 +1,110 @@
+<!--<div *ngIf="commentloading" style="text-align: center;width: 100%;height: 100%;display: flex;justify-content: center;align-items: center;">-->
+<!--        <span>-->
+<!--          <img src="assets/images/loading.gif"/>  -->
+<!--        </span>-->
+<!--    </div>-->
+<!--    <div *ngIf="!commentloading" class="dialog-content-wrapper" >-->
+<!--        <a class="lb-prev" [style.visibility]="postIndex > 0 ?'visible':'hidden'" (click)="populateMove(-1)"></a>-->
+<!--        <div mat-dialog-content class="p-0 m-0" fxLayout="row" fxLayoutAlign="start start" >-->
+<!--            -->
+<!--            <div style="display: block;overflow: hidden;">-->
+<!--                &lt;!&ndash; <img class="fullview" [src]="post?.media ? post?.media : 'assets/images/etc/mountain-lake.jpg'" /> &ndash;&gt;-->
+<!--                <canvas id="canvas" class="fullview" width="500" height="500"></canvas>-->
+<!--            </div>-->
+<!--            <div >-->
+<!--                <div class="timeline-item" >-->
+<!--                        <header fxLayout="row" fxLayoutAlign="space-between start">-->
+<!--                            <div class="user" fxLayout="row" fxLayoutAlign="start center">-->
+<!--                                <a href="/users/{{post?.owner?.username}}/" target="_blank">-->
+<!--                                    <img class="avatar" [src]="post?.owner?.avatar ? post?.owner?.avatar : 'assets/images/avatars/profile.jpg'">-->
+<!--                                </a>-->
+<!--                                <div fxLayout="column">-->
+<!--                                    <div class="title">-->
+<!--                                        <a class="owner-name" href="/users/{{post?.owner?.username}}/" target="_blank">-->
+<!--                                            <span class="username">{{post?.owner?.username}}</span>-->
+<!--                                        </a>-->
+<!--                                        &lt;!&ndash; <span>- &nbsp;&nbsp;{{post?.title}}</span> &ndash;&gt;-->
+<!--                                        &lt;!&ndash; <span *ngIf="post.type === 'something'">shared something with you</span>-->
+<!--                                                        <span *ngIf="post.type === 'video'">shared a video with you</span>-->
+<!--                                                        <span *ngIf="post.type === 'article'">shared an article with you</span> &ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                    <div class="time">Location</div>-->
+<!--                                    &lt;!&ndash; <div class="time">{{post?.createdAt | date: 'medium'}}</div> &ndash;&gt;-->
+<!--                                </div>-->
+<!--        -->
+<!--                                <div fxLayout="row" fxLayoutAlign="end center" *ngIf="user._id!=post?.owner?._id">-->
+<!--                                    <div *ngIf="!post?.owner?.isFollowing" class="follow-button">-->
+<!--                                        <button *ngIf="!post?.owner?.isUpdating" style="color:white;cursor:pointer;" (click)="onFollow(post?.owner)">-->
+<!--                                                Follow-->
+<!--                                            </button>-->
+<!--        -->
+<!--                                        <img *ngIf="post?.owner?.isUpdating" src="assets/images/loading_white.gif" />-->
+<!--        -->
+<!--                                    </div>-->
+<!--                                    <div *ngIf="post?.owner?.isFollowing" class="following-button">-->
+<!--                                        Following-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </header>-->
+<!--                        <div class="content">-->
+<!--                            <div class="description">-->
+<!--                                <a class="owner-name" ></a>-->
+<!--                                <span class="description-content" [innerHtml]="highlight(post?.description) | sliceLine"></span>-->
+<!--                                <a class="sXUSN" href="#" *ngIf="post?.description?.length > 125">&nbsp;more</a>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                    <button mat-button class="load-comment-btn" (click)="loadMoreComments()">Load More Comments</button>-->
+<!--                                </div>-->
+<!--                            <div id="comments-container" class="comments" fusePerfectScrollbar [fusePerfectScrollbarOptions]="{suppressScrollX: true, updateOnRouteChange : true}">-->
+<!--                                <div class="comment-contents" fxLayout="row" fxLayoutAlign="space-between center"  *ngFor="let comment of post?.comments" >-->
+<!--                                    <div >-->
+<!--                                        <a class="owner-name">{{comment?.commenter?.username}} &nbsp;</a>-->
+<!--                                        <span>{{comment?.text | sliceLine}}</span>-->
+<!--                                    </div>-->
+<!--                                    <a class="sXUSN" href="#" *ngIf="comment?.text.length > 125">&nbsp;more</a>-->
+<!--                                    <button mat-icon-button class="like-button" (click)="likeComment(comment)">-->
+<!--                                        <mat-icon class="s-24 like-icon" *ngIf="!comment.myLiked" [ngClass]="{'my-liked': comment.myLiked == true}">favorite_border</mat-icon>-->
+<!--                                        <mat-icon class="s-24 like-icon my-liked" *ngIf="comment.myLiked">favorite</mat-icon>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--                                <div fxLayout="row" fxLayoutAlign="start center">-->
+<!--                                    <button mat-icon-button class="like-button" (click)="likePost(post)">-->
+<!--                                        <mat-icon class="s-24 like-icon" *ngIf="!post.myLiked" [ngClass]="{'my-liked': post.myLiked == true}">favorite_border</mat-icon>-->
+<!--                                        <mat-icon class="s-24 like-icon my-liked" *ngIf="post.myLiked">favorite</mat-icon>-->
+<!--                                    </button>-->
+<!--                                    <button mat-icon-button class="share-button" (click)="commentPost(commentTxtAreaInput, post)">-->
+<!--                                        <mat-icon class="s-24">chat_bubble_outline</mat-icon>-->
+<!--                                    </button>-->
+<!--                                    <button mat-icon-button class="share-button" (click)="sharePost(post)">-->
+<!--                                        <mat-icon class="s-24">publish</mat-icon>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                                <div fxLayout="row" fxLayoutAlign="end center">-->
+<!--                                    <button mat-icon-button class="share-button" (click)="bookmarkPost(post)">-->
+<!--                                        <mat-icon class="s-24 like-icon" *ngIf="!post.bookmark">bookmark_border</mat-icon>-->
+<!--                                        <mat-icon class="s-24 like-icon my-liked" *ngIf="post.bookmark">bookmark</mat-icon>-->
+<!--                                    </button>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <div class="views" *ngIf="post?.likeCount > 0">-->
+<!--                                <p>{{post?.likeCount}} Likes</p>-->
+<!--                            </div>-->
+<!--                            -->
+<!--                            <div class="hour">-->
+<!--                                <p class="hour-label">{{post?.createdAt}}</p>-->
+<!--                            </div>-->
+<!--                            <div class="add-comment-section">-->
+<!--                                <textarea #commentTxtAreaInput autosize class="my-textarea" placeholder="Add a comment..."-->
+<!--                                    (keydown.enter)="addComment(commentTxtAreaInput, post);false"></textarea>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>        -->
+<!--            </div>-->
+<!--            -->
+<!--        </div>-->
+<!--    -->
+<!--        <a class="lb-next" [style.visibility]="postIndex < postCount - 1 ?'visible':'hidden'" (click)="populateMove(1)"></a>-->
+<!--    </div>-->

@@ -1,0 +1,219 @@
+<div id="timeline" class="p-8" fxLayout="row wrap" fxLayoutAlign="center">
+
+    <div class="no-courses" *ngIf="!loading && posts.length === 0">
+        No liked posts found!
+    </div>
+    <div class="loading-courses" *ngIf="loading">
+        Loading...
+    </div>
+
+    <div class="timeline-content" fxLayout="column" fxLayoutAlign="center center" fxFlex="100" fxFlex.gt-sm="100" fxFlex.gt-md="100">
+
+        <!-- <mat-divider></mat-divider> -->
+
+        <div class="timeline-item" *ngFor="let post_data of posts">
+
+            <header fxLayout="row" fxLayoutAlign="space-between start">
+                <div class="user" fxLayout="row" fxLayoutAlign="center center">
+                    <a [routerLink]="'/users/' + post_data?.owner?._id">
+                        <img class="avatar"
+                            [src]="post_data?.owner?.avatar ? post_data?.owner?.avatar : 'assets/images/avatars/profile.jpg'">
+                    </a>
+                    <div fxLayout="column">
+                        <div class="title pl-8">
+                            <a class="owner-name" href="/users/{{post_data?.owner?._id}}/">
+                                <span class="username">{{post_data?.owner?.username}}</span>
+                            </a>
+                        </div>
+<!--                        <div class="pt-4 time" fxLayout="row">-->
+<!--                            <mat-icon>location_on</mat-icon>-->
+<!--                            <span class="secondary-text">{{post?.location?.toUpperCase()}}</span>-->
+<!--                        </div>-->
+                        <!-- <div class="time">{{post?.createdAt | date: 'medium'}}</div> -->
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="end end">
+                    <button mat-icon-button class="small-mat" aria-label="More" (click)="onMoreClicked(post_data)">
+                        <mat-icon class="s-20">more_horiz</mat-icon>
+                    </button>
+
+                    <ng-template #MoreMenuDialog>
+                        <!-- <h2 style="margin-top: 0px;"><mat-icon class="secondary-text s-20 mr-8">share</mat-icon> Sharing...</h2> -->
+                        <div class="dialog-menu-wrapper">
+                            <mat-dialog-content class="cropper-content">
+                                <div class="fuse-card dialog-menu-items">
+                                    <button mat-menu-item (click)="dialogRef.close(['Delete'])" *ngIf="this.post_data.owner._id === this.currentUser.id">Delete</button>
+                                    <div class="card-divider full-width"></div>
+                                    <button mat-menu-item (click)="dialogRef.close(['Share'])">Share to...</button>
+                                    <div class="card-divider full-width"></div>
+                                    <button mat-menu-item (click)="dialogRef.close(['Copy'])">Copy link</button>
+                                    <div class="card-divider full-width"></div>
+                                    <button mat-menu-item (click)="dialogRef.close(['Embed'])">Embed</button>
+                                    <div class="card-divider full-width"></div>
+                                    <button mat-menu-item (click)="dialogRef.close()">Go back to post</button>
+                                </div>
+                            </mat-dialog-content>
+                        </div>
+                    </ng-template>
+
+                    <div class="pt-4 secondary-text">{{formatPeriod(post_data?.createdAt)}}</div>
+                </div>
+            </header>
+            <div class="content">
+                <div class="media" *ngIf="post_data?.media">
+                    <img *ngIf="post_data?.type === 2 && !post_data.blur"
+                        [src]="post_data?.media ? post_data?.media : 'assets/images/avatars/profile.jpg'"
+                        (dblclick)="likePost(post_data)" (click)="onPostClicked(post_data)">
+                    <vg-player *ngIf="post_data?.type === 3 && !post_data.blur" (click)="onPostClicked(post_data)">
+                        <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+                            <source [src]="post_data?.media" type="video/3gpp">
+                        </video>
+                    </vg-player>
+                        <div *ngIf="post_data.blur" class="blur_content">
+                        <p>Click To View Image</p>
+                        <p>You will be charged {{post_data.fee}} tokens</p>
+                        <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" (click)="onPostPay(post_data)" *ngIf="!post_data?.loading">View</button>
+                        <button mat-raised-button class="submit-button pl-30 pr-30" color="accent" [disabled] = true *ngIf="post_data?.loading">Loading...</button>
+                    </div>
+                    <img *ngIf="post_data.blur" [src]="'assets/images/55685.jpg'">
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxLayout="row" fxLayoutAlign="start center">
+                        <button mat-icon-button class="like-button" (click)="likePost(post_data)">
+                            <mat-icon *ngIf="!post_data.myLiked" [ngClass]="{'my-liked': post_data.myLiked == true}">
+                                favorite_border</mat-icon>
+                            <mat-icon class="my-liked" *ngIf="post_data.myLiked">favorite</mat-icon>
+                        </button>
+                        <button mat-icon-button class="share-button" (click)="commentPost(post_data)">
+                            <mat-icon>chat_bubble_outline</mat-icon>
+                        </button>
+                        <button mat-icon-button class="share-button" (click)="onShareClicked()">
+                            <mat-icon>share</mat-icon>
+                        </button>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end center">
+                        <button mat-icon-button class="share-button" (click)="onBookmarkClicked(post_data)">
+                            <mat-icon *ngIf="!post_data.bookmark">bookmark_border</mat-icon>
+                            <mat-icon *ngIf="post_data.bookmark">bookmark</mat-icon>
+                        </button>
+                    </div>
+                </div>
+                <div class="description">
+                    <a class="owner-name" title="post?.owner?.username">{{post_data?.owner?.username}}&nbsp;</a>
+                    <span class="description-content" [innerHtml]="highlight(post_data?.title) | sliceLine"></span>
+                    <a class="sXUSN" href="#" *ngIf="post_data?.title.length > 125">&nbsp;more</a>
+                </div>
+            </div>
+
+            <footer class="" fxLayout="column" fxLayoutAlign="start start">
+
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <div class="comments-hero pr-8">
+                        {{post_data.commentCount}} Comments
+                    </div>
+
+                    <div class="comments-hero">
+                        {{post_data.likeCount}} Likes
+                    </div>
+                </div>
+
+                <!-- <div class="comment" fxLayout="row" fxFlexFill fxLayoutAlign="space-between space-between"
+                    *ngFor="let comment of post?.comments">
+                    <div class="message">
+                        <span class="username">{{comment?.commenter?.username}}&nbsp;&nbsp;</span>
+                        <span *ngIf="!comment.isdetail" [innerHtml]="highlight(comment?.text) | sliceLine"></span>
+                        <span *ngIf="comment?.isdetail">{{highlight(comment?.text)}}</span>
+                        <a (click)="viewCommentDetail(comment)" color="accent" class="view-detail"
+                            *ngIf="(comment?.text.length > 125) && !comment.isdetail">&nbsp;more</a>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="end start">
+                        <button mat-icon-button class="small-like-button" (click)="likeComment(comment)">
+                            <mat-icon class="s-16" *ngIf="!comment.myLiked">
+                                favorite_border</mat-icon>
+                            <mat-icon class="s-16 my-liked" *ngIf="comment.myLiked">favorite</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div *ngIf="post.comments.length < post.commentCount">
+                    <button mat-button class="load-comment-btn" (click)="loadMoreComments(post)">Load
+                        More...</button>
+                </div>
+
+                <div class="pt-8" *ngIf="post.comments.length < post.commentCount">
+                    <div class="comment" fxLayout="row" fxFlexFill fxLayoutAlign="space-between space-between"
+                        *ngFor="let comment of post?.likeComments">
+
+                        <div class="message">
+                            <span class="username">{{comment?.commenter?.username}}&nbsp;&nbsp;</span>
+                            <span *ngIf="!comment.isdetail" [innerHtml]="highlight(comment?.text) | sliceLine"></span>
+                            <span *ngIf="comment?.isdetail">{{highlight(comment?.text)}}</span>
+                            <a (click)="viewCommentDetail(comment)" class="view-detail"
+                                *ngIf="(comment?.text.length > 125) && !comment.isdetail">&nbsp;more</a>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="end start">
+                            <button mat-icon-button class="small-like-button" (click)="likeCommentInLikes(comment, post.comments)">
+                                <mat-icon class="s-16" *ngIf="!comment.myLiked">
+                                    favorite_border</mat-icon>
+                                <mat-icon class="s-16 my-liked" *ngIf="comment.myLiked">favorite</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="reply pt-8" fxLayout="row" fxFlexFill *ngIf="post_data.showComment">
+                    <img src="assets/images/avatars/profile.jpg" class="avatar" />
+
+                    <form fxFlex>
+                        <textarea placeholder="Add a comment..." #commentTxtAreaInput></textarea>
+                        <button mat-raised-button class="my-theme-color" aria-label="Post Comment"
+                            (click)="addComment(commentTxtAreaInput, post_data)">
+                            Post Comment
+                        </button>
+                    </form>
+                </div>
+            </footer>
+
+            <ng-template #socialShareDialog class="dialog-content-wrapper">
+                <h2 style="margin-top: 0px;">
+                    <mat-icon class="secondary-text s-20 mr-8">share</mat-icon> Sharing...
+                </h2>
+
+                <mat-dialog-content class="cropper-content" class="cropper-content">
+                    <div class="share-items">
+                        <button mat-button [socialShare]="'fb'" class="share-item" fxLayout="row"
+                            fxLayoutAlign="start center">
+                            <img class="social-img" src="assets/images/social/facebook.svg" />
+                            <span>Facebook </span>
+                        </button>
+
+                        <button mat-button [socialShare]="'tw'" class="share-item" fxLayout="row"
+                            fxLayoutAlign="start center">
+                            <img class="social-img" src="assets/images/social/twitter.svg" />
+                            <span>Twitter </span>
+                        </button>
+
+                        <button mat-button [socialShare]="'in'" class="share-item" fxLayout="row"
+                            fxLayoutAlign="start center">
+                            <img class="social-img" src="assets/images/social/linkedin.svg" />
+                            <span>Linkdedin </span>
+                        </button>
+                        <!--
+                        <div [socialShare]="'tr'">Tumblr</div>
+                        <div [socialShare]="'rd'">Reddit</div>
+                        <div [socialShare]="'pn'">Pinterest</div>
+        -->
+                    </div>
+                </mat-dialog-content>
+                <!--
+                <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center" style="margin-top: -10px;">
+                    <button mat-button (click)="onGiveTipClick()" color="accent" [disabled]="giveTipAmountInput.value <= 0">Give</button>
+                    <button mat-button (click)="giveTipDialogRef.close()" color="primary">Cancel</button>
+                </mat-dialog-actions>
+                -->
+                <!--<button mat-button (click)="onImageCropClose">OK</button> -->
+            </ng-template>
+        </div>
+    </div>
+
+</div>

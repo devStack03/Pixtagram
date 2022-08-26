@@ -1,0 +1,340 @@
+@import "src/@fuse/scss/fuse";
+
+profile-bookmarks {
+
+    .custom-class {
+        position: fixed;
+        background-color: pink;
+        border-color: green;
+        height: 30px;
+        width: 30px;
+        display: block;
+    }
+
+    #myBtn {
+        display: block; /* Hidden by default */
+        position: fixed; /* Fixed/sticky position */
+        bottom: 120px; /* Place the button at the bottom of the page */
+        right: 30px; /* Place the button 30px from the right */
+        z-index: 99; /* Make sure it does not overlap */
+        border: none; /* Remove borders */
+        outline: none; /* Remove outline */
+        background-color: green; /* Set a background color */
+        color: white; /* Text color */
+        cursor: pointer; /* Add a mouse pointer on hover */
+        padding: 15px; /* Some padding */
+        border-radius: 10px; /* Rounded corners */
+        font-size: 18px; /* Increase font size */
+    }
+    
+    #myBtn:hover {
+        background-color: #555; /* Add a dark-grey background on hover */
+    }
+
+    #timeline {
+        .no-courses {
+            font-size: 32px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .loading-courses {
+            font-size: 24px;
+            margin: 32px 0;
+            text-align: center;
+        }
+
+        .timeline-content {
+
+            .add-post {
+                margin-bottom: 0;
+                border-radius: 4px;
+                overflow: hidden;
+                @include mat-elevation(2);
+
+                textarea {
+                    display: flex;
+                    flex: 1 0 auto;
+                    font-size: 13px;
+                    width: 100%;
+                    height: 140px;
+                    border: none;
+                    padding: 16px;
+                    resize: vertical;
+                }
+
+                footer {
+                    padding: 8px 12px 8px 8px;
+                    border-top: 1px solid;
+                }
+            }
+
+            mat-divider {
+                border-top-width: 1px;
+                border-top-style: solid;
+                margin: 32px 0;
+            }
+
+            .timeline-item {
+                min-width: 300px;
+                max-width: 400px;
+                width: 100%;
+                margin-bottom: 32px;
+                overflow: hidden;
+                border-radius: 4px;
+                @include mat-elevation(2);
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+
+                header {
+                    padding: 8px 8px 4px 8px;
+
+                    .title {
+                        font-weight: 600;
+
+                        .username {
+                            margin-right: 2px;
+                        }
+                    }
+
+                    .small-mat {
+                        line-height: 20px;
+                        height: 20px;
+                        width: 20px;
+                    }
+                }
+
+                .content {
+                    position: relative;
+                    .message {
+                        padding: 16px;
+                    }
+
+                    .media {
+                        padding: 16px;
+                        cursor: pointer;
+
+                        img, iframe {
+                            width: 100%;
+                        }
+
+                        a {
+                            color: inherit;
+                        }
+                        .blur_content{
+                            position: absolute;
+                            font-size: 18px;
+                            text-align: center;
+                            left: calc(50% - 120px);
+                            top: calc(50% - 100px);
+                        }
+                    }
+
+                    .views {
+                        padding-left: 16px;
+                        p {
+                            margin-top: 0;
+                        }                        
+                    }
+
+                    .description {
+                        padding: 0 16px;
+                        
+                        .owner-name {
+                            text-decoration: none;
+                            font-weight: 600;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            color: #262626;
+                        }
+
+                        .description-content {
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            word-break: break-word;
+
+                            .hash-tag {
+                                color: red; /*Hightlight hashtags*/
+                            }
+                        }
+    
+                        .sXUSN {
+                            color: #999;
+                            text-decoration: none;
+                        }
+                    }
+
+                    .like-button,
+                    .share-button {
+                        padding: 4px 6px;
+                        text-transform: inherit;
+                        font-size: 13px;
+                        font-weight: normal;
+                        margin: 0 0 0 8px;
+                        min-width: inherit;
+                        line-height: inherit;
+
+                        &:hover {
+                            background-color: transparent;
+                        }
+
+                        mat-icon {
+                            margin: 0 8px 0 0;
+                        }
+                    }
+
+                    .like-button {
+                        .my-liked {
+                            color: red;
+                        }
+                    }
+
+                    .comments {
+                        .load-comment-btn {
+                            color: #999!important;
+                        }
+                        .owner-name {
+                            text-decoration: none;
+                            font-weight: 600;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            padding-left: 16px;
+                            color: #262626;
+                        }
+                    }
+
+                    .article {
+                        border: 1px solid;
+                        margin: 16px;
+
+                        .media {
+                            padding: 0;
+                            overflow: hidden;
+                            border-bottom: 1px solid;
+
+                            img {
+                                display: block;
+                                padding: 0;
+                            }
+                        }
+
+                        .title {
+                            font-size: 15px;
+                            padding: 16px 16px 4px 16px;
+                        }
+
+                        .subtitle {
+                            padding: 0 16px;
+                        }
+
+                        .excerpt {
+                            padding: 16px 16px;
+                        }
+                    }
+                }
+                
+                footer {
+                    padding: 16px;
+
+                    .comment-count {
+                        margin-bottom: 16px;
+                        cursor: pointer;
+
+                        mat-icon {
+                            margin-left: 8px;
+                        }
+                    }
+
+                    .comment {
+                        margin-bottom: 24px !important;
+
+                        .username {
+                            font-weight: 600;
+                            margin-right: 4px;
+                        }
+
+                        .actions {
+                            margin-top: 8px;
+
+                            .reply-button {
+                                margin-right: 16px;
+                                cursor: pointer;
+                            }
+
+                            .report-button {
+                                margin: 0;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+
+                    .reply {
+
+                        form {
+
+                            textarea {
+                                width: 100% !important;
+                                min-height: 72px;
+                                padding: 8px;
+                                margin-bottom: 8px;
+                                font-size: 13px;
+                                border: 1px solid;
+                                border-radius: 4px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Profile boxes
+    .profile-box {
+        border-radius: 4px;
+        overflow: hidden;
+        margin-bottom: 16px;
+        @include mat-elevation(2);
+
+        header {
+            padding: 16px;
+
+            .title {
+                font-size: 17px;
+            }
+
+            .more {
+                cursor: pointer;
+            }
+        }
+
+        .content {
+            padding: 16px;
+        }
+
+        footer {
+            padding: 8px;
+            border-top: 1px solid;
+        }
+
+        &.info-box {
+
+            .info-line {
+                margin-bottom: 24px;
+
+                .title {
+                    font-size: 15px;
+                    font-weight: 600;
+                    padding-bottom: 4px;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

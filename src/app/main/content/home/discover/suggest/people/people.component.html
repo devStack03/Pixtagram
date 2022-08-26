@@ -1,0 +1,59 @@
+<!--<div class="page-layout carded fullWidth">-->
+<!--    <div class="card-block">-->
+<!--        <div class="card-body">-->
+<!--            <div class="discover-people" fxHide fxShow.gt-xs>-->
+<!--                <div class="yQ0j1">Suggested</div>-->
+<!--                <div class="user-container">-->
+<!--                    <ng-container>-->
+<!--                        <div class="user-item" *ngFor="let user of users">-->
+<!--                            <header fxLayout="row" fxLayoutAlign="space-between center">-->
+<!--                                <div class="user" fxLayout="row" fxLayoutAlign="start center">-->
+<!--                                    <a href="/users/{{user?.username}}/" target="_blank">-->
+<!--                                        <img class="profile-image avatar medium" [src]="user?.avatar ? user?.avatar : 'assets/images/avatars/profile.jpg'">-->
+<!--                                    </a>-->
+<!--                                    <div fxLayout="column" class="userinfo">-->
+<!--                                        <div class="username">-->
+<!--                                            {{user?.username}}-->
+<!--                                        </div>-->
+<!--                                        <div class="fullname">{{user?.name}}</div>-->
+<!--                                        &lt;!&ndash; <div class="time">{{post?.createdAt | date: 'medium'}}</div> &ndash;&gt;-->
+<!--                                    </div>-->
+
+
+<!--                                </div>-->
+<!--                                <div fxLayout="row" fxLayoutAlign="end center">-->
+<!--                                    <div *ngIf="!user?.isFollowing">-->
+<!--                                        <button *ngIf="!user?.isUpdating" mat-button class="follow-button" (click)="onFollow(user)">-->
+<!--                                            Follow-->
+<!--                                        </button>-->
+
+<!--                                        <button *ngIf="user?.isUpdating" mat-button class="follow-button">-->
+<!--                                            <img src="assets/images/loading_white.gif" />-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                    <div *ngIf="user?.isFollowing">-->
+<!--                                        <button *ngIf="!user?.isUpdating" mat-button (click)="onUnfollow(user)" class="following-button">-->
+<!--                                            Following-->
+<!--                                        </button>-->
+
+<!--                                        <button *ngIf="user?.isUpdating" mat-button class="following-button">-->
+<!--                                            <img src="assets/images/loading.gif" />-->
+<!--                                        </button>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </header>-->
+
+<!--                        </div>-->
+<!--                    </ng-container>-->
+<!--                </div>-->
+
+<!--                <div *ngIf="loading" style="text-align:center">-->
+<!--                    <span>-->
+<!--                <img src="assets/images/loading.gif"/>  -->
+<!--            </span>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->

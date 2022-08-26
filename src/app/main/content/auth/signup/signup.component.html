@@ -1,0 +1,95 @@
+<div id="register" fxLayout="column" fusePerfectScrollbar>
+    <block-ui>
+        <div class="container" fxLayout="row" fxLayoutAlign="center">
+            <div id="register-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+                <div id="register-form" *fuseIfOnDom [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+                    <div class="logo">
+                        <img src="assets/images/logos/logo.png">
+                    </div>
+
+                    <div class="title">Sign up to see photos and videos from your friends.</div>
+
+                    <div fxLayout="column" fxLayoutAlign="center">
+<!--                        <div fxLayout="row " fxLayoutAlign="center" class="mb-3">-->
+<!--                            <img class="mat-tooltip-trigger social-image" src="assets/images/social/googleplus.png" fxLayoutAlign="left"/>-->
+<!--                            <a class="hand-cursor link w-50-p" (click)="onClickLoginWithGoogle()" fxLayoutAlign="right center">-->
+<!--                                Log in with Google-->
+<!--                            </a>-->
+<!--                        </div>-->
+                        <div fxLayout="row " fxLayoutAlign="center">
+                            <img class="mat-tooltip-trigger social-image" src="assets/images/social/nn.jpg" fxLayoutAlign="left"/>
+                            <a class="hand-cursor link w-50-p"  fxLayoutAlign="right center" id="loginwithz">
+                                Log in with NN Network
+                            </a>
+                        </div>
+                    </div>
+                    <div class="separator">
+                        <span class="text">OR</span>
+                    </div>
+                    <form name="registerForm" [formGroup]="registerForm" novalidate (ngSubmit)="onSubmit()">
+
+<!--                        <mat-form-field appearance="outline">-->
+<!--                                <mat-label>Email</mat-label>-->
+<!--                            <input matInput placeholder="Email" formControlName="email">-->
+<!--                            <mat-error *ngIf="registerFormErrors.email.required">-->
+<!--                                Email is required-->
+<!--                            </mat-error>-->
+<!--                            <mat-error *ngIf="!registerFormErrors.email.required && registerFormErrors.email.email">-->
+<!--                                Please enter a valid email address-->
+<!--                            </mat-error>-->
+<!--                        </mat-form-field>-->
+
+                        <!-- <mat-form-field appearance="outline">
+                            <input matInput placeholder="Full Name" formControlName="fullName">
+                        </mat-form-field> -->
+
+<!--                        <mat-form-field appearance="outline">-->
+<!--                            <input matInput placeholder="Username" formControlName="name">-->
+<!--                            <mat-label>Username</mat-label>-->
+<!--                            <mat-error *ngIf="registerFormErrors.name.required">-->
+<!--                                Username is required-->
+<!--                            </mat-error>-->
+<!--                        </mat-form-field>-->
+
+<!--                        <mat-form-field appearance="outline">-->
+<!--                            <mat-label>Password</mat-label>-->
+<!--                            <input matInput type="text" placeholder="Choose Password" formControlName="password">-->
+<!--                            <mat-icon matSuffix class="secondary-text">visibility_off</mat-icon>-->
+<!--                            <mat-error *ngIf="registerFormErrors.password.required">-->
+<!--                                Password is required-->
+<!--                            </mat-error>-->
+<!--                        </mat-form-field>-->
+
+                        <!-- <mat-form-field>
+                            <input matInput type="password" placeholder="Password (Confirm)" formControlName="passwordConfirm">
+                            <mat-error *ngIf="registerFormErrors.passwordConfirm.required">
+                                Password confirmation is required
+                            </mat-error>
+                            <mat-error *ngIf="registerFormErrors.passwordConfirm.passwordsNotMatch">
+                                Passwords must match
+                            </mat-error>
+                        </mat-form-field> -->
+
+
+                        <div>By signing up, you agree to the <a href="/terms" target="_blank">terms and conditions of use.</a>
+                        </div>
+
+<!--                        <button mat-raised-button color="accent" class="submit-button w-30-p" aria-label="CREATE AN ACCOUNT" [disabled]="registerForm.invalid">-->
+<!--                            Sign Up-->
+<!--                        </button>-->
+
+                    </form>
+
+                    <div class="register" fxLayout="row" fxLayoutAlign="center center">
+                        <span class="text">Have an account?</span>
+                        <a class="link" href="/login">Log In</a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </block-ui>
+</div>

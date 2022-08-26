@@ -1,0 +1,63 @@
+<div class="page-layout blank" fxLayout="row" fxLayoutAlign="center">
+    <div id="search">
+        <div class="content">
+            <div class="users" fxLayout="column" fxLayoutAlign="center">
+                <span class="matchs-text">
+	             Transactions
+	            </span>
+                <mat-tab-group #profileTabs dynamicHeight="true" (selectedTabChange)="onTabChange($event)">
+                    <mat-tab label="income">
+                        <ng-template mat-tab-label>
+                            Income Nudles
+                        </ng-template>
+                    </mat-tab>
+                    <mat-tab label="outcome">
+                        <ng-template mat-tab-label>
+                            Spent Nudles
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+                <ngx-datatable
+                    class="material"
+                    [selected]="selected"
+                    (select)='onSelect($event)'
+                    (activate)="onActivate($event)"
+                    [rows]="trans"
+                    [loadingIndicator]="loadingIndicator"
+                    [headerHeight]="48"
+                    [footerHeight]="56"
+                    [rowHeight]="'auto'"
+                    [scrollbarH]="true"
+                    [reorderable]="reorderable"
+                    [selectionType]="'checkbox'"
+                    [limit]="15">
+                    <ngx-datatable-column name="Select">
+                        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+                                     let-selectFn="selectFn">
+                            <mat-checkbox [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)"></mat-checkbox>
+                        </ng-template>
+
+                        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+                                     let-onCheckboxChangeFn="onCheckboxChangeFn">
+                            <mat-checkbox [checked]="isSelected" (change)="onCheckboxChangeFn($event)"></mat-checkbox>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="From" prop="from" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Amount" prop="fee" ></ngx-datatable-column>
+                    <ngx-datatable-column name="Comment" prop="msg" [width]="270"></ngx-datatable-column>
+                    <ngx-datatable-column name="Date" prop="createdAt" [width]="230">
+                        <ng-template let-value="value" ngx-datatable-cell-template>
+                            <span>{{formatPeriod(value)}}</span>
+                        </ng-template>
+                    </ngx-datatable-column>
+                </ngx-datatable>
+                <button mat-raised-button type="button" color="warn" class="mt-8" (click)="clear('')">
+                    Clear
+                </button>
+                <button mat-raised-button type="button" color="warn" class="mt-8" (click)="clear('all')">
+                    Clear All
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

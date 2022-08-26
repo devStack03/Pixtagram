@@ -1,0 +1,200 @@
+@import "src/@fuse/scss/fuse";
+.card-body {
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    margin: 0 auto 30px;
+    max-width: 935px;
+    width: 100%;
+}
+
+.yQ0j1 {
+    color: #999;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-bottom: 16px;
+    text-align: left;
+    text-transform: capitalize;
+}
+
+.hUQXy,
+.hUQXy:visited {
+    color: #3897f0;
+}
+
+.HUW1v {
+    display: block;
+    -webkit-box-flex: 0;
+    -webkit-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    float: right;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.user-tables {
+    flex: 1 0 auto;
+}
+
+:host {
+    .discover-feed {
+        margin-top: 48px;
+        .period {
+            .period-title {
+                margin-bottom: 24px;
+                .name {
+                    font-size: 20px;
+                }
+                .info {
+                    margin-left: 16px;
+                    font-size: 15px;
+                    color: rgba(0, 0, 0, 0.54);
+                }
+            }
+            .media {
+                margin: 8px 0 8px 0;
+                position: relative;
+                .preview {
+                    width: 280px;
+                    height: 280px;
+                    display: block;
+                }
+                .title {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    z-index: 10;
+                    padding: 0 16px;
+                    height: 48px;
+                    line-height: 48px;
+                    background: rgba(0, 0, 0, 0.54);
+                    color: #FFF;
+                    font-size: 15px;
+                }
+            }
+        }
+    }
+}
+
+.feed-caption {
+    display: block;
+    overflow: hidden;
+}
+
+.feed-caption-bottom {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    -webkit-transition: transform .6s cubic-bezier(.19, 1, .22, 1);
+    transition: transform .6s cubic-bezier(.19, 1, .22, 1);
+}
+
+.feed-caption-top {
+    display: flex;
+    position: absolute;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    opacity: 0;
+    top: 0;
+    -webkit-transition: opacity .8s cubic-bezier(.19, 1, .22, 1);
+    transition: opacity .8s cubic-bezier(.19, 1, .22, 1);
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.feed-caption:hover .feed-caption-top {
+    opacity: 1;
+}
+
+.feed-caption:hover .feed-caption-bottom {
+    -webkit-transform: scale(1.25);
+    transform: scale(1.25);
+}
+
+.feed-caption-top .feed-likes-container {
+    margin: 0;
+    padding: 0;
+}
+
+.feed-likes-container .feed-likes-content {
+    width: 100%;
+    margin: 0;
+    color: #FFF;
+    display: flex;
+}
+
+.feed-likes-content .feed-icons {
+    padding-right: 3px;
+}
+
+.feed-likes-content .feed-like-nums {
+    margin-top: 2px;
+    padding-right: 30px;
+}
+
+.feed-likes-content .feed-comment-nums {
+    margin-top: 2px;
+}
+
+.follow-button,
+.following-button {
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    //display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    min-width: 88px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 2px;
+    overflow: visible;
+    transform: translate3d(0, 0, 0);
+    transition: background .4s cubic-bezier(.25, .8, .25, 1), box-shadow 280ms cubic-bezier(.4, 0, .2, 1);
+    margin: 16px auto 22px auto;
+    background-color: #1e88e5;
+    //box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    color: white;
+    min-height: 36px;
+}
+
+.following-button {
+    background-color: white;
+    border: 1px solid #666;
+    color: #000;
+    outline-style: inset;
+}
+
+// @media (min-width: 640px)
+// .BSqtQ {
+//     padding-top: 60px;
+// }
+// @media (min-width: 736px)
+// .BSqtQ {
+//     -webkit-box-sizing: content-box;
+//     box-sizing: content-box;
+//     padding: 40px 20px 0;
+//     width: calc(100% - 40px);
+// }

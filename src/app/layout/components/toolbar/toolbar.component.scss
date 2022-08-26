@@ -1,0 +1,215 @@
+@import "src/@fuse/scss/fuse";
+body.theme-default a{
+    color: #000 !important;
+}
+.notification-menu-empty {
+    min-width: 300px !important;
+    max-width: 100vw !important;
+    margin-right: -90px !important;
+    @include media-breakpoint('xs') {
+        margin-right: -56px !important;
+    }
+}
+
+.toast-warning,.toast-error,.toast-success,.toast-info{
+    background-image: none !important;
+}
+
+.toast-container .ngx-toastr {
+    position: relative;
+    overflow: hidden;
+    margin: 0 0 6px;
+    padding: 7px 15px 7px 14px;
+    width: 300px;
+    border-radius: 30px 30px 35px 5px;
+    background-position: 15px center;
+    background-repeat: no-repeat;
+    background-size: 24px;
+    box-shadow: 0 0 12px #999999;
+    color: #FFFFFF;
+}
+
+
+.notification-menu {
+    min-width: 500px !important;
+    max-width: 90vw !important;
+    margin-right: -90px !important;
+    max-height: 80vh !important;
+    @include media-breakpoint('xs') {
+        min-width: 90vw !important;
+        max-width: 90vw !important;
+        margin-right: -66px !important;
+    }
+
+    .mat-menu-content {
+        width: 100% !important;
+        height: 100% !important;
+
+        .notification-content {
+            height: 100% !important;
+            overflow: scroll;
+        }
+    }
+}
+
+.notification-item {
+    padding: 10px;
+
+    a{
+        color: #000 !important;
+    }
+    .type-button {
+        width: 18px !important;
+        background-color: white !important;
+        border-top-right-radius: 4px;
+        margin-top: -12px;
+    }
+}
+toolbar {
+    position: relative;
+    display: flex;
+    flex: 0 0 auto;
+    z-index: 4;
+
+    &.below {
+        z-index: 2;
+    }
+
+    .mat-toolbar {
+        position: relative;
+        background: inherit;
+        color: inherit;
+        span.user-button{
+            line-height: 64px;
+            @include media-breakpoint('xs'){
+                line-height: 56px;
+            }
+            .init_btn{
+                min-width: unset;
+                padding: 0;
+            }
+            .nn_off{
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .bg-white{
+        background: white !important;
+        color: #000;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+
+        .logo-icon {
+            height: 35px;
+        }
+    }
+
+    .user-button,
+    fuse-search-bar,
+    .language-button,
+    .chat-panel-toggle-button,
+    .quick-panel-toggle-button {
+        .new-message {
+            position: absolute;
+            border: 3px solid red;
+            border-radius: 50%;
+            left: 37px;
+            top: 18px;
+        }
+        min-width: 52px;
+        height: 64px;
+
+        @include media-breakpoint('xs') {
+            height: 56px;
+        }
+    }
+
+    .navbar-toggle-button {
+        min-width: 56px;
+        height: 56px;
+    }
+
+    .blank-space {
+        width: 25%;
+        height: 64px;
+    }
+
+    .toolbar-separator {
+        height: 64px;
+        width: 1px;
+        background: rgba(0, 0, 0, .12);
+
+        @include media-breakpoint('xs') {
+            height: 56px;
+        }
+    }
+
+    .fuse-search-bar-content {
+        border: 1px solid #dbdbdb;
+        display: flex;
+        flex: 1 0 auto;
+        align-items: center;
+        justify-content: flex-start;
+
+        .fuse-search-bar-expander,
+        .fuse-search-bar-collapser {
+            cursor: pointer;
+            padding: 0 20px;
+            margin: 0;
+            height: 40px !important;
+            line-height: 40px !important;
+        }
+
+        .fuse-search-bar-collapser {
+            display: none;
+        }
+
+        #fuse-search-bar-input {
+            flex: 1 0 auto;
+            min-height: 40px;
+            background-color: transparent;
+            font-size: 16px;
+        }
+    }
+
+    .username {
+        font-size: 18px;
+    }
+}
+
+.menu-form-dialog {
+
+    .mat-dialog-container {
+        padding: 0;
+        border-radius: 8px;
+    }
+
+    .dialog-menu-wrapper {
+        max-height: 540px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .cropper-content {
+        max-width: 540px !important;
+        max-height: 420px !important;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .dialog-menu-items {
+        max-width: 540px;
+        min-width: 80px !important;
+    }
+    
+    .dialog-menu-item {
+        //max-width: 400px;
+        //margin-bottom: 1px;
+        //padding: 5px !important;
+        min-width: 50px !important;
+    }
+}

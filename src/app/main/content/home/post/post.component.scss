@@ -1,0 +1,103 @@
+@import 'src/@fuse/scss/fuse';
+
+form {
+
+
+    .mat-form-field {
+        width: 100%;
+        flex: 1;
+    }
+    textarea {
+        min-height: 72px;
+        font-size: 15px;
+        border-radius: 4px;
+    }
+
+
+}
+
+.new-post {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    max-width: 600px;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex: 1 0 auto;
+
+
+    .media {
+        white-space: normal;
+        letter-spacing: .010em;
+        min-height: 100px;
+        min-width: 100px;
+        //border-bottom: 1px solid;
+        padding: 16px;
+        cursor: pointer;
+    }
+
+    .post-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .submit-button {
+        width: 150px;
+        min-width: 150px;
+        height: 36px;
+        line-height: 36px;
+    }
+    
+}
+
+.optionButton {
+    cursor: pointer;
+}
+
+.XX1Wc {
+    margin-left: 30px;
+    button {
+        text-transform: none;
+        padding: 0 16px;
+        height: 32px;
+        line-height: 32px;
+        margin: 0;
+        padding: 0;
+    }
+    h4 {
+        margin: 0 !important;
+    }
+}
+
+.label {
+    margin: 4px !important;
+    font-size: 17px;
+}
+.comment {
+    margin: 4px !important;
+    color: #707072 !important;
+    font-size: 12px;
+}
+
+.blue {
+    color: #039be5;
+}
+
+.mat-form-field {
+
+    &.mat-form-field-appearance-outline {
+
+        .mat-form-field-outline {
+            top: 0;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        padding: 0;
+
+        .mat-form-field-infix {
+            border-top: 0;
+        }
+    }
+}

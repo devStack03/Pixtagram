@@ -1,0 +1,176 @@
+@import "src/@fuse/scss/fuse";
+
+:host {
+
+    #login {
+        width: 100%;
+        overflow: auto;
+        background-size: cover;
+
+        .social-image {
+            width: 20px;
+            height: 20px;
+            margin-right: 6px;
+            
+        }
+
+        #login-form-wrapper {
+            flex: 1 0 auto;
+            padding: 32px;
+
+            @include media-breakpoint('xs') {
+                padding: 16px;
+            }
+
+            #login-form {
+                width: 384px;
+                max-width: 384px;
+                padding: 32px;
+                background: #FFFFFF;
+                text-align: center;
+                min-height: 500px; /* Need to remove when all ui elements are restored */
+                @include mat-elevation(16);
+
+                @include media-breakpoint('xs') {
+                    padding: 24px;
+                    width: 100%;
+                }
+
+                .logo {
+                    width: 128px;
+                    margin: 32px auto;
+                }
+
+                .title {
+                    font-size: 16px;
+                    margin: 16px 0 32px 0;
+                }
+
+                form {
+                    width: 100%;
+                    text-align: left;
+
+                    mat-form-field {
+                        width: 100%;
+                    }
+
+                    mat-checkbox {
+                        margin: 0;
+                    }
+
+                    .remember-forgot-password {
+                        font-size: 13px;
+                        margin-top: 8px;
+
+                        .remember-me {
+                            margin-bottom: 16px
+                        }
+
+                        .forgot-password {
+                            font-size: 13px;
+                            font-weight: 500;
+                            margin-bottom: 16px
+                        }
+                    }
+
+                    .submit-button {
+                        width: 220px;
+                        margin: 16px auto;
+                        display: block;
+
+                        @include media-breakpoint('xs') {
+                            width: 90%;
+                        }
+                    }
+                }
+
+                .register {
+                    margin: 32px auto 24px auto;
+                    font-weight: 500;
+
+                    .text {
+                        margin-right: 8px;
+                    }
+                }
+
+                .separator {
+                    font-size: 15px;
+                    font-weight: 600;
+                    margin: 24px auto;
+                    position: relative;
+                    overflow: hidden;
+                    width: 100%;
+                    color: rgba(0, 0, 0, 0.54);
+
+                    .text {
+                        display: inline-flex;
+                        position: relative;
+                        padding: 0 8px;
+                        z-index: 9999;
+
+                        &:before, &:after {
+                            content: '';
+                            display: block;
+                            width: 200px;
+                            position: absolute;
+                            top: 10px;
+                            border-top: 1px solid rgba(0, 0, 0, 0.12);
+                        }
+
+                        &:before {
+                            right: 100%;
+                        }
+
+                        &:after {
+                            left: 100%;
+                        }
+                    }
+                }
+
+                button {
+
+                    &.google,
+                    &.facebook {
+                        width: 192px;
+                        text-transform: none;
+                        color: #FFFFFF;
+                        font-size: 13px;
+                    }
+
+                    @include media-breakpoint('xs') {
+                        width: 80%;
+                    }
+
+                    &.google {
+                        background-color: #D73D32;
+                        font-size: 13px;
+                    }
+
+                    &.facebook {
+                        background-color: #3897f0;
+                        font-size: 13px;
+                    }
+                }
+
+            }
+        }
+    }
+}
+
+.mat-form-field {
+
+    .mat-form-field-appearance-outline {
+
+        .mat-form-field-outline {
+            top: 0;
+        }
+    }
+
+    .mat-form-field-wrapper {
+        padding: 0;
+
+        .mat-form-field-infix {
+            border-top: 0;
+        }
+    }
+}

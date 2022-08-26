@@ -1,0 +1,54 @@
+<div class="page-layout blank" fxLayout="row" fxLayoutAlign="center"
+            infiniteScroll
+          [infiniteScrollDistance]="1"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollContainer]="'#container-3'"
+          [fromRoot]="true"
+          (scrolled)="onScroll()">
+    <div id="search">
+        <div class="header">
+            <div fxLayout="row" fxLayoutAlign="center center">
+                <mat-form-field class="search-field" appearance="outline">
+                    <mat-icon matPrefix class="secondary-text">search</mat-icon>
+                    <input matInput placeholder="Enter a keyword..." [formControl]="searchInput"
+                        [(ngModel)]="searchTerm">
+                </mat-form-field>
+                <img *ngIf="loading" src="assets/images/loading/loading-spinner-blue.gif" class="loading mt-16" />
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="users" fxLayout="column" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+
+                <!--<button mat-button  class="kudo" *ngFor="let bookmark of bookmarks" [@animate]="{value:'*',params:{y:'100%'}}" 
+                (click)="onBookmarkClicked(bookmark)" long-press (onLongPress)="onBookmarkLongPressed(bookmark)"> -->
+                <span class="matchs-text" [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+	             Matchs
+	        </span>
+                <button mat-button class="user" *ngFor="let user of users" [@animate]="{value:'*',params:{y:'100%'}}"
+                    (click)="onUserClicked(user)" [long-press] (onRelease)="onLongPressed(user)">
+
+                    <div fxLayout="row" fxLayoutAlign="start center">
+
+                        <div class="avatar-wrapper" fxFlex="0 1 auto" fxLayoutAlign="center center">
+                            <img src="{{user?.avatar ? user?.avatar : 'assets/images/avatars/katherine.jpg'}}" class="avatar" />
+                        </div>
+
+                        <div fxLayout="row" fxFlex>
+
+                            <div class="pr-4" fxFlex fxLayout="column" fxLayoutAlign="center start">
+                                <div class="username">{{user.username}}</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </button>
+
+                <div cclass="no-courses" *ngIf="!loading && users.length === 0">
+                    No Users Found!
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

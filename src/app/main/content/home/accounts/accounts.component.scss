@@ -1,0 +1,105 @@
+@import "src/@fuse/scss/fuse";
+
+:host {
+    width: 100%;
+    .center {
+        .header {
+
+            .search-wrapper {
+                @include mat-elevation(7);
+
+                .sidenav-toggle {
+                    margin: 0;
+                    width: 56px;
+                    height: 56px;
+                    background: #FFF;
+                    border-radius: 0;
+                    border-right: 1px solid rgba(0, 0, 0, .12);
+                }
+
+                .search {
+                    width: 100%;
+                    height: 56px;
+                    line-height: 56px;
+                    padding: 18px;
+
+                    input {
+                        height: 56px;
+                        padding-left: 16px;
+                        color: rgba(0, 0, 0, 0.54);
+                        border: none;
+                        outline: none;
+                    }
+                }
+            }
+        }
+
+        .content-card {
+
+            @include media-breakpoint(xs) {
+
+                fuse-mail-list {
+                    border-right: none;
+                }
+
+                fuse-mail-list,
+                fuse-mail-details {
+                    flex: 1 0 100%;
+                }
+
+                fuse-mail-details {
+                    display: none !important;
+                }
+
+                &.current-mail-selected {
+
+                    .toolbar {
+                        padding-left: 16px !important;
+
+                        .mail-selection {
+                            display: none !important;
+                        }
+                    }
+
+                    .content {
+
+                        fuse-mail-list {
+                            display: none !important;
+                        }
+
+                        fuse-mail-details {
+                            display: flex !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.accounts {
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    max-width: 935px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .sidenav-container {
+        min-height: 100%;
+        background-color: white;
+    }
+}
+
+app-main-sidenav {
+    border-right: 1px solid #dbdbdb;
+}
+app-accounts-data {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+

@@ -1,0 +1,9 @@
+<div><h4>Change Profile Photo</h4></div>
+<mat-grid-list cols="1" rowHeight="50px">
+  <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows">
+    <button>{{tile.text}}</button>
+  </mat-grid-tile>
+</mat-grid-list>

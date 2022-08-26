@@ -1,0 +1,101 @@
+<!-- CHAT fxFlex class="page-layout carded fullWidth"-->
+<div class="chat-room" fxFlex fxLayout="column" fxLayoutAlign="center">
+
+    <!-- CHAT CONTENT -->
+    <div id="chat-content" fxFlex="1 1 auto" fusePerfectScrollbar>
+
+        <!-- CHAT MESSAGES -->
+        <div class="chat-messages">
+
+            <!-- MESSAGE -->
+            <div *ngFor="let message of this.dialog; let i = index" class="message-row" [ngClass]="{
+                            'me': message.isSend,
+                            'contact': !message.isSend
+                            }" fxLayout="column">
+
+                <img [src]=" message.isSend ? (user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg') : (message.from?.avatar ? message.from?.avatar :'assets/images/avatars/katherine.jpg')"
+                    class="avatar">
+
+                <div class="bubble">
+                    <div class="message-info">
+                        <div class="username">{{message.isSend ? user?.username : message.from.username}}</div>
+                        <div class="time">{{formatFromNow(message.date)}}</div>
+                    </div>
+                    <div class="message">{{message.message}}</div>
+                    <div class="media" *ngIf="message?.media">
+                        <img *ngIf="message?.message_type === 2"
+                            [src]="message?.media ? message?.media : 'assets/images/avatars/profile.jpg'">
+                        <div [style]="message?.message_type===3 ?'display: block' : 'display: none'">
+                            <video #imgVideo id="singleVideo" preload="auto" controls style="max-width: 100%;">
+                                <source [src]="message?.media" type="video/3gpp">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- / MESSAGE -->
+
+        </div>
+        <!-- CHAT MESSAGES -->
+
+    </div>
+    <!-- / CHAT CONTENT -->
+
+    <input id="chat_photo_input" name="chat_photo_input" hidden type="file" #photoInput
+        accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg, video/mp4, video/avi, video/3gpp"
+        (change)="onFileInput($event.target.files[0])">
+
+    <!-- CHAT FOOTER -->
+    <div class="chat-footer" fxFlex="0 0 auto" fxLayout="column">
+
+        <div fxLayout="row" class="photos">
+            <div fxLayout="row" class="has-handle">
+
+                <img #imgPhoto class="photo" [src]="'assets/images/avatars/profile.jpg'"
+                    [style]="message_type===2 ?'display: block' : 'display: none'">
+                <div [style]="message_type===3 ?'display: block' : 'display: none'">
+                    <video #imgVideo class="photo" preload="auto" controls style="max-width: 100%;">
+                        <source [src]="" type="video/3gpp">
+                    </video>
+                </div>
+                <mat-icon *ngIf="message_type === 2 || message_type === 3" class="remove" (click)="onRemovePhoto()">
+                    cancel</mat-icon>
+
+            </div>
+        </div>
+
+        <!-- REPLY FORM -->
+        <div class="reply-form" fxFlex="0 0 auto" fxLayout="row" fxLayoutAlign="center center">
+
+            <img [src]="user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'" class="avatar">
+
+            <!-- <form #replyForm="ngForm" (ngSubmit)="reply($event)" (keydown.enter)="reply($event)" fxFlex fxLayout="row"
+                fxLayoutAlign="start center"> -->
+            <form #replyForm="ngForm" (ngSubmit)="onSubmit()" fxFlex fxLayout="row" fxLayoutAlign="start center">
+
+                <mat-form-field class="message-text" fxFlex floatLabel="never" appearance="standard">
+                    <p id="typing-notification">{{this.typing}}</p>
+                    <textarea  matInput #replyInput placeholder="Type your message" ngModel name="message" [rows]="1"
+                        [matTextareaAutosize]="true"  (keydown)="onKeys($event)"  (keydown.shift.enter)="onKeyDowns(1)" (keydown.enter)="onKeyDowns(2)"></textarea>
+                </mat-form-field>
+
+                <button class="send-message-button" mat-icon-button type="submit" aria-label="Send Message">
+                    <mat-icon class="secondary-text">send</mat-icon>
+                </button>
+
+            </form>
+
+            <button class="add-button" mat-icon-button aria-label="Add Photo or Video"
+                (click)="onOpenFile('chat_photo_input')">
+                <mat-icon class="secondary-text">add_a_photo</mat-icon>
+            </button>
+
+        </div>
+        <!-- / REPLY FORM -->
+
+    </div>
+    <!-- / CHAT FOOTER-->
+
+</div>
+<!-- / CHAT -->

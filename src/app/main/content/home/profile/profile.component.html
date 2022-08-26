@@ -1,0 +1,184 @@
+<div id="profile" class="page-layout simple tabbed"
+        infiniteScroll
+          [infiniteScrollDistance]="1"
+          [infiniteScrollThrottle]="50"
+          [infiniteScrollContainer]="'#container-3'"
+          [fromRoot]="true"
+          (scrolled)="onScroll()">
+
+    <!-- HEADER -->
+    <div class="header p-16" fxLayout="column" fxLayoutAlign="space-between space-between" fxLayout.gt-sm="column"
+        fxLayoutAlign.gt-sm="space-between space-between">
+        <div fxfill fxLayout="row" fxLayoutAlign="start center">
+            <div class="pl-4 pr-4" style="flex:1" fxLayout="row" fxLayoutAlign="start start">
+                <img class="profile-image avatar huge"
+                    [src]=" user?.avatar ? user?.avatar :'assets/images/avatars/katherine.jpg'"
+                    [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
+            </div>
+
+            <div class="pl-4 pr-4" style="flex:1" fxLayout="column" fxLayoutAlign="start center">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <span class="accent-fg">{{user?.posts_count}}</span>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <span class="secondary-text">
+                        Posts
+                    </span>
+                </div>
+            </div>
+            <div class="toolbar-separator"></div>
+            <div class="pl-4 pr-4" style="flex:1" fxLayout="column" fxLayoutAlign="start center">
+                <div class="" fxLayout="column" fxLayoutAlign="start center">
+                    <span class="accent-fg" title="4">{{user?.followers_count}}</span>
+                </div>
+                <div class="" fxLayout="column" fxLayoutAlign="end center">
+                    <a class="secondary-text" mat-button (click)="goFollow(0)">
+                        Followers
+                    </a>
+                </div>
+            </div>
+            <div class="toolbar-separator"></div>
+            <div class="pl-4 pr-4" style="flex:1" fxLayout="column" fxLayoutAlign="start center">
+                <div class="" fxLayout="column" fxLayoutAlign="start center">
+                    <span class="accent-fg">{{user?.followings_count}}</span>
+                </div>
+                <div class="" fxLayout="column" fxLayoutAlign="end center">
+                    <a class="secondary-text" mat-button (click)="goFollow(1)">
+                        Following
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="actions" fxLayout="column" fxLayoutAlign="start center"
+            [@animate]="{value:'*',params:{delay:'200ms'}}">
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <a mat-button class="border-button mr-20" [routerLink]="'/accounts/edit/'" *ngIf="isMine" fxLayout="row"
+                    fxLayoutAlign="start center">
+                    <mat-icon class="">edit</mat-icon>
+                    Edit Profile
+                </a>
+                <a mat-button class="border-button" (click)="onFollowClicked()" *ngIf="!isMine && !isFollowed" [disabled]="following_state"
+                    fxLayout="row" fxLayoutAlign="start center">{{following_state ? 'Loading...' : 'Follow'}}</a>
+                <a mat-button class="border-button" (click)="onUnfollowClicked()" *ngIf="!isMine && isFollowed" [disabled]="following_state"
+                    fxLayout="row" fxLayoutAlign="start center">{{following_state ? 'Loading...' : 'Following'}}</a>
+                <a mat-button [routerLink]="'/post'" class="border-button" fxLayout="row" fxLayoutAlign="start center"
+                    *ngIf="isMine">
+                    <mat-icon class="">add_a_photo</mat-icon>
+                    Post
+                    <!-- <span fxHide fxShow.gt-sm>Edit Profile</span>
+                    <span fxShow fxHide.gt-sm>Edit</span> -->
+                </a>
+            </div>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <button mat-button [matMenuTriggerFor]="viewMenu" class="tab-setting">
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <mat-icon>sort</mat-icon>
+                </div>
+            </button>
+
+            <mat-menu #viewMenu="matMenu" [overlapTrigger]="false">
+                <span style="padding: 0 16px">sort by:</span>
+                <button mat-menu-item (click)="onMostActiveClicked()">
+                    <span>Most Active</span>
+                </button>
+
+                <button mat-menu-item (click)="onNewestPostClicked()">
+                    <span>Newest post</span>
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+    <!-- / HEADER -->
+
+    <!-- CONTENT -->
+    <div class="content">
+        <mat-tab-group #profileTabs dynamicHeight="true" (selectedTabChange)="onTabChange($event)">
+
+            <mat-tab label="posts">
+                <ng-template mat-tab-label>
+                    <mat-icon>apps</mat-icon>
+                </ng-template>
+                <profile-posts #profilePostView [posts]="posts" [loading]="loading" [user]="user" [currentUser]="currentUser"
+                    [returnParams]="returnParams"></profile-posts>
+                <div id="profile-no-post" class="p-16" *ngIf="!loading && !posts.length" fxLayout="column"
+                    fxLayoutAlign="center center">
+
+
+                    <input type="file" hidden id="avatar" name="avatar"
+                        accept="image/jpeg, .jpeg, image/png, .png, image/pjpeg, .jpg"
+                        (change)="onFileInput(0, $event.target.files[0], $event)">
+                    <ng-template #avatarCropDialog>
+                        <h2 matDialogTitle>Image Cropping...</h2>
+                        <mat-dialog-content class="cropper-content" class="cropper-content">
+
+                            <image-cropper [imageChangedEvent]="avatarChangedEvent" [maintainAspectRatio]="true"
+                                [aspectRatio]="4 / 4" format="png" (imageCropped)="onAvatarCropped($event)"
+                                (imageLoaded)="onAvatarLoaded()" (cropperReady)="onAvatarCropperReady()"
+                                (loadImageFailed)="onAvatarLoadFailed()">
+                            </image-cropper>
+
+                        </mat-dialog-content>
+
+                        <mat-dialog-actions fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-button matDialogClose="OK" color="primary">OK</button>
+                        </mat-dialog-actions>
+
+                        <!--<button mat-button (click)="onImageCropClose">OK</button> -->
+                    </ng-template>
+
+
+                    <div class="" fxLayout="row" fxLayoutAlign="center center">
+                        <span class="mat-title">Get Started</span>
+                    </div>
+                    <div class="fuse-card p-16" fxLayout="column" fxLayoutAlign="center center">
+                        <div class="p-16" fxLayout="column" fxLayoutAlign="center center">
+                            <img class="avatar" #imgAvatar [src]="avatarCroppedImage">
+                            <div class="p-16" fxLayout="row" fxLayoutAlign="center center">
+                                <span class="secondary-text">Add your photo so your friends know its you.</span>
+                            </div>
+                        </div>
+
+                        <button mat-button class="border-button" fxLayout="row" fxLayoutAlign="center center"
+                            [routerLink]="'/post'">
+                            <span>Add Post</span>
+                        </button>
+                    </div>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="feed">
+                <ng-template mat-tab-label>
+                    <mat-icon>dns</mat-icon>
+                </ng-template>
+                <profile-feed-format #profileFeedView [posts]="posts" [user]="user" [loading]="loading"
+                    [returnParams]="returnParams" [currentUser]="currentUser"></profile-feed-format>
+            </mat-tab>
+
+            <mat-tab label="likes">
+                <ng-template mat-tab-label>
+                    <mat-icon>favorite</mat-icon>
+                </ng-template>
+                <profile-likes #profileLikeView [posts]="posts" [user]="user" [loading]="loading"
+                    [returnParams]="returnParams" [currentUser]="currentUser"></profile-likes>
+            </mat-tab>
+
+            <mat-tab label="bookmark-posts">
+                <ng-template mat-tab-label>
+                    <mat-icon>bookmark_border</mat-icon>
+                </ng-template>
+                <profile-bookmarks #profileBookmarkView [posts]="posts" [user]="user" [loading]="loading"
+                    [returnParams]="returnParams" [currentUser]="currentUser"></profile-bookmarks>
+            </mat-tab>
+            <mat-tab label="chatting">
+                <ng-template mat-tab-label>
+                    <mat-icon>sms</mat-icon>
+                </ng-template>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+    <!-- / CONTENT -->
+</div>

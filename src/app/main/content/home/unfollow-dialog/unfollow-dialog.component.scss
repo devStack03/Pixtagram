@@ -1,0 +1,42 @@
+@import "src/@fuse/scss/fuse";
+.unfollow-dialog {
+    @include media-breakpoint('xs') {
+        width: 100%;
+    }
+    //@include media-breakpoint-up('xs') {
+        width: 400px;
+    //}
+    .mat-dialog-container {
+        padding: 0;
+        background: white;
+        border-radius: 15px !important;
+        .profile-image {
+            margin-top: 20px;
+        }
+
+        .message{
+            margin-top: 20px;
+            font-size: 20px;
+            color: #666666;
+        }
+
+        .unfollow {
+            width: 100%;
+            font-size: 18px;
+            border-radius: 0px;
+            color: #EE1111;
+            border-bottom: 1px solid #cccccc;
+            height: 50px;
+            margin-top: 30px;
+        }
+
+        .cancel {
+            width: 100%;
+            font-size: 18px;
+            border-radius: 0px;
+            height: 50px;
+        }
+    }
+
+
+}
